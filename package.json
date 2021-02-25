@@ -1,0 +1,23 @@
+{
+  "name": "violetforest.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/violetforest/violetforest.github.io.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/violetforest/violetforest.github.io/issues"
+  },
+  "homepage": "https://github.com/violetforest/violetforest.github.io#readme",
+  "dependencies": {
+    "mustache": "^4.0.1",
+    "pug": "^3.0.0"
+  }
+}
