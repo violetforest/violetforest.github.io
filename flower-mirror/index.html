@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>fL♡ա㉹r ɱĨᖆᖆōᖆ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Exo+2:300|VT323" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./../css/site.css">
+  </head>
+  <style>
+    body {
+      margin: 0;
+      cursor: move;
+      overflow: hidden;
+      height: 100%;
+      font-family: 'VT323', monospace;
+      font-weight: normal;
+      font-size: 20px;
+      background-color: #ffcfee;
+      background: linear-gradient(243deg, #ffd1ee, #fef6a9, #e0ffc6, #b2f3fc, #d5c2ff, #d5c2ff, #e8c2ff, #ffc2f0, #ffd7c2, #fffa8a, #e2fcdf, #dff1fc, #e8dffc);
+      background-size: 300% 300%;
+      -webkit-animation: gradient 59s ease infinite;
+      -moz-animation: gradient 59s ease infinite;
+      -o-animation: gradient 59s ease infinite;
+      animation: gradient 59s ease infinite;
+    }
+    h1 {
+      font-size: 1.3em;
+      margin: 0;
+    }
+    .menu-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      z-index: -1;
+      margin: 1em;
+    }
+    .info {
+      position: relative;
+      width: auto;
+      height: 100%;
+      padding: 2em 3em;
+      font-size: 1.7em;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 1s;
+      -webkit-transition: all 1s;
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+    .show-modal .menu-overlay {
+      z-index: 5;
+    }
+    .show-modal .info {
+      height: auto;
+      opacity: 1;
+      visibility: visible;
+      transition: all 1s;
+      -webkit-transition: all 1s;
+    }
+
+    .toggle-button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 5em;
+      cursor: pointer;
+      padding: 0;
+      appearance: none;
+      background: none;
+      border: none;
+      outline: none;
+      border-radius: 0;
+      z-index: 30;
+    }
+    svg {
+      position: relative;
+      fill: #fff;
+      width: 50px;
+      height: 50px;
+      transition: all 1s;
+      -webkit-transition: all 1s;
+    }
+    .show-modal svg {
+      fill: #000;
+      transition: all 1s;
+      -webkit-transition: all 1s;
+    }
+    @media (max-width: 1200px) {
+      .info {
+        font-size: 1.2em;
+      }
+    }
+    @media (max-width: 640px) {
+      .info {
+        font-size: 1em;
+      }
+    }
+    @-webkit-keyframes gradient {
+        0%{background-position:0% 36%}
+        50%{background-position:100% 65%}
+        100%{background-position:0% 36%}
+    }
+    @-moz-keyframes gradient {
+        0%{background-position:0% 36%}
+        50%{background-position:100% 65%}
+        100%{background-position:0% 36%}
+    }
+    @keyframes gradient {
+        0%{background-position:0% 36%}
+        50%{background-position:100% 65%}
+        100%{background-position:0% 36%}
+    }
+    ::-webkit-scrollbar {
+        display: none;
+    }
+  </style>
+  <body id="body">
+  <button id="button" onclick="toggle()" class="toggle-button">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          version="1.1" x="0px" y="0px"
+          viewBox="0 0 100 100"
+          enable-background="new 0 0 100 100"
+          xml:space="preserve">
+            <path d="M50,0C22.386,0,0,22.386,0,50s22.386,50,50,50s50-22.386,50-50S77.614,0,50,0z M47.557,89.203  c-1.431,0.826-2.766,1.24-4.006,1.24c-1.016,0-1.89-0.451-2.622-1.354c-0.733-0.902-1.1-2.199-1.1-3.891  c0-2.443,0.995-7.367,2.988-14.773c3.931-14.51,5.897-23.25,5.897-26.221c0-1.428-0.545-2.143-1.635-2.143  c-1.204,0-4.192,1.635-8.966,4.905l-1.128-2.255c9.288-6.954,15.394-10.432,18.316-10.432c0.898,0,1.59,0.253,2.078,0.761  c0.486,0.507,0.73,1.25,0.73,2.227c0,2.368-0.865,6.805-2.594,13.309c-4.404,16.578-6.605,26.633-6.605,30.166  c0,1.279,0.583,1.918,1.749,1.918c1.354,0,4.38-1.691,9.081-5.076l1.127,2.199C55.492,84.109,51.054,87.248,47.557,89.203z   M61.127,22.37c-1.26,1.429-2.697,2.143-4.312,2.143c-1.316,0-2.406-0.441-3.271-1.325c-0.865-0.883-1.297-2.095-1.297-3.637  c0-1.917,0.678-3.609,2.029-5.075c1.354-1.466,2.857-2.199,4.512-2.199c1.316,0,2.35,0.414,3.102,1.241  c0.752,0.827,1.127,2.011,1.127,3.552C63.016,19.175,62.387,20.942,61.127,22.37z">
+          </path>
+        </svg>
+      </button>
+    <div id="overlay" class="menu-overlay">
+      <div class="info">
+        <h1>fL♡ա㉹r ɱĨᖆᖆōᖆ</h1>
+        <h1>Violet Forest</h1>
+        <h1>2017</h1>
+        <h1>WebGL</h1>
+
+        <p>fL♡ա㉹r ɱĨᖆᖆōᖆ attempts to recreate with the graphics card the pastel iridescent effect that is currently trendy in textiles, printing, and femme consumerism. The flower staring at itself in the mirror is a metaphor for selfie culture. The obsession of staring at oneself's beauty in the mirror parallels the obsession of staring at iridescent objects.</p>
+
+        <p>You can zoom in, zoom out, and move the flower to get lost in the light hitting the fresnel shader at different angles, similar to the way one gets lost staring at the image of oneself in a phone's front-facing camera. The mobile version of the website allows you to use your device's orientation to move the mirror around like a pocket mirror.</p>
+      </div>
+    </div>
+    <div id="info-next">
+      <a href="./../flower-mirror.html">
+        <svg version="1.1"
+           id="Layer_1" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:dc="http://purl.org/dc/elements/1.1/"
+           xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="29.7 11.2 139.1 137.6"
+           enable-background="new 29.7 11.2 139.1 137.6" xml:space="preserve">
+        <g transform="translate(0,-952.36218)">
+          <path d="M99.2,964.1c-37.9,0-68.7,30.6-68.7,68.2s30.8,68.2,68.7,68.2s68.7-30.6,68.7-68.2S137.2,964.1,99.2,964.1z M99.2,967.3
+            c36.2,0,65.5,29.1,65.5,65.1c0,36-29.3,65.1-65.5,65.1s-65.5-29.1-65.5-65.1C33.7,996.4,63,967.3,99.2,967.3z M111.9,1011.7
+            c-0.9,0.1-1.6,0.8-1.5,1.7c0,0.4,0.2,0.9,0.6,1.1l19.1,16.3h-66c-0.1,0-0.2,0-0.3,0c-0.9,0.1-1.5,0.9-1.4,1.7
+            c0.1,0.9,0.9,1.5,1.7,1.4h66l-19.1,16.2c-0.7,0.6-0.8,1.6-0.2,2.3c0.6,0.7,1.6,0.7,2.3,0.2l22.4-19c0.7-0.6,0.8-1.6,0.2-2.2
+            c-0.1-0.1-0.1-0.1-0.2-0.2l-22.4-19C112.7,1011.8,112.3,1011.6,111.9,1011.7z"/>
+        </g>
+        </svg>
+      </a>
+    </div>
+    <script src="build/three.js"></script>
+    <script src="js/controls/DeviceOrientationControls.js"></script>
+    <script src="js/loaders/OBJLoader.js"></script>
+    <script src="js/controls/OrbitControls.js"></script>
+    <script src="js/Mirror.js"></script>
+    <script src="js/shaders/FresnelShader.js"></script>
+
+    <script>
+      function toggle() {
+        document.getElementById('body').classList.toggle("show-modal");
+      }
+    </script>
+
+    <script id="fragmentShader2" type="x-shader/x-fragment">
+      uniform float time;
+      uniform vec2 resolution;
+      varying vec2 vUv;
+      void main( void ) {
+        vec2 position = -1.0 + 2.0 * vUv;
+        float red = abs( sin( position.x * position.y + time / 5.0 ) );
+        float green = abs( sin( position.x * position.y + time / 4.0 ) );
+        float blue = abs( sin( position.x * position.y + time / 3.0 ) );
+        gl_FragColor = vec4( red, green, blue, 1.0 );
+      }
+    </script>
+
+    <script id="vertexShader" type="x-shader/x-vertex">
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+    </script>
+
+    <script>
+      var models = [];
+      var container;
+      var camera, cameraBg, scene, sceneBg, renderer;
+      var cameraControls;
+      var mouseX = 0, mouseY = 0;
+      var windowHalfX = window.innerWidth / 2;
+      var windowHalfY = window.innerHeight / 2;
+      var clock = new THREE.Clock();
+      var flowerTexture = new THREE.ImageUtils.loadTexture( 'textures/holographic.jpg' );
+      flowerTexture.wrapS = flowerTexture.wrapT = THREE.RepeatWrapping;
+
+      var windowHeight = window.innerHeight
+
+      var isTouchDevice = function(){
+        return true === ('ontouchstart' in window || window.DocumentTouch && document instanceof DocumentTouch);
+      }
+
+      var isIOS8 = function() {
+        var deviceAgent = navigator.userAgent.toLowerCase();
+        return /(iphone|ipod|ipad).* os 8_/.test(deviceAgent);
+      }
+
+      var isSafari = function(){
+        return true === !!navigator.userAgent.match(/version\/[\d\.]+.*Safari/);
+      }
+
+      init();
+      animate();
+
+      function init() {
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+
+        camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 5, 2000 );
+        camera.position.set(267, 0, 500);
+
+        renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setFaceCulling( THREE.CullFaceNone );
+
+        // scene
+        scene = new THREE.Scene();
+
+        var value = mouseY;
+        this.customUniforms2 = {
+          baseSpeed:    { type: "f", value: 0.5 },
+          flowerTexture:   { type: "t", value: flowerTexture },
+          noiseScale:   { type: "f", value: 0.05 },
+          alpha:      { type: "f", value: 1.0 },
+          time:       { type: "f", value: value }
+        };
+
+        cameraControls = new THREE.OrbitControls(camera, renderer.domElement);
+        cameraControls.maxDistance = 500;
+        cameraControls.minDistance = -200;
+        cameraControls.update();
+
+        // model
+
+        var texture = new THREE.Texture();
+
+        var path = "textures/";
+        var format = '.jpg';
+        var urls = [
+            path + '1024' + format, path + '1024' + format,
+            path + '1024' + format, path + '1024' + format,
+            path + '1024' + format, path + '1024' + format
+          ];
+        var textureCube = new THREE.CubeTextureLoader().load( urls );
+        textureCube.format = THREE.RGBFormat;
+        scene = new THREE.Scene();
+
+        var shader = THREE.FresnelShader;
+        var uniformsFresnel = THREE.UniformsUtils.clone( shader.uniforms );
+        uniformsFresnel[ "tCube" ].value = textureCube;
+
+        var fresnelShader = new THREE.ShaderMaterial( {
+          uniforms: uniformsFresnel,
+          vertexShader: shader.vertexShader,
+          fragmentShader: shader.fragmentShader
+        } );
+        fresnelShader.side = THREE.DoubleSide;
+
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function ( item, loaded, total ) {
+          console.log( item, loaded, total );
+        };
+
+        var onProgress = function ( xhr ) {
+          if ( xhr.lengthComputable ) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log( Math.round(percentComplete, 2) + '% downloaded' );
+          }
+        };
+
+        var loader = new THREE.OBJLoader(manager);
+
+        for ( var i = 0; i < 1; i ++ ) {
+          loader.load("obj/bouquet.obj", function(object) {
+            object.traverse(function(child) {
+              if (child instanceof THREE.Mesh) {
+                child.material.map = texture;
+                child.material = fresnelShader;
+                fresnelShader.side = THREE.DoubleSide;
+            }
+           });
+            object.position.x = 8;
+            object.position.y = -30;
+            object.position.z = 300;
+
+            object.scale.x = 150;
+            object.scale.y = 150;
+            object.scale.z = 150;
+            obj = object;
+            scene.add(obj);
+            models.push(obj);
+          });
+        }
+
+        // ADD BACK WALL
+        var backWallGeometry = new THREE.BoxGeometry( 2000, 2000, 10 );
+        var backWall = new THREE.Mesh( backWallGeometry, fresnelShader );
+        backWall.position.z = -600;
+        scene.add( backWall );
+
+        // ADD LEFT WALL
+        var leftWallGeometry = new THREE.BoxGeometry( 10, 2000, 2000 );
+        var leftWall = new THREE.Mesh( leftWallGeometry, fresnelShader );
+        leftWall.position.x = -600;
+        scene.add( leftWall );
+
+        // ADD RIGHT WALL
+        var rightWallGeometry = new THREE.BoxGeometry( 10, 2000, 2000 );
+        var rightWall = new THREE.Mesh( rightWallGeometry, fresnelShader );
+        rightWall.position.x = +600;
+        scene.add( rightWall );
+
+        // ADD FRONT WALL
+        var frontWallGeometry = new THREE.BoxGeometry( 2000, 2000, 10 );
+        var frontWall = new THREE.Mesh( backWallGeometry, fresnelShader );
+        frontWall.position.z = +600;
+        scene.add( frontWall );
+
+        // ADD FLOOR
+        var floorGeometry = new THREE.BoxGeometry( 2000, 10, 2000 );
+        var floor = new THREE.Mesh( floorGeometry, fresnelShader );
+        floor.position.y = -600;
+        scene.add( floor );
+
+        // ADD ROOF
+        var roofGeometry = new THREE.BoxGeometry( 2000, 5, 2000 );
+        var roof = new THREE.Mesh( roofGeometry, fresnelShader );
+        roof.position.y = 600;
+        scene.add( roof );
+
+        var verticalMirror = new THREE.Mirror( 300, 300, {
+          clipBias: 0.001,
+          textureWidth: window.innerWidth * window.devicePixelRatio,
+          textureHeight: window.innerHeight * window.devicePixelRatio,
+          color: 0x889999
+        } );
+        verticalMirror.position.y = 0;
+        verticalMirror.position.z = -200;
+        scene.add( verticalMirror );
+
+        if (isTouchDevice() && !isSafari() && !isIOS8()) {
+          controls = new THREE.DeviceOrientationControls( verticalMirror );
+        } else {
+        }
+
+        container.appendChild( renderer.domElement );
+        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+        //
+        window.addEventListener( 'resize', onWindowResize, false );
+      }
+      function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+      }
+      function onDocumentMouseMove( event ) {
+        mouseX = ( event.clientX - windowHalfX ) / 2;
+        mouseY = ( event.clientY - windowHalfY ) / 2;
+      }
+      //
+      function animate() {
+        requestAnimationFrame( animate );
+        render();
+        var delta = clock.getDelta();
+        customUniforms2.time.value += delta;
+      }
+
+      function render() {
+        for ( var i = 0; i < models.length; i ++ ) {
+        console.log("x" + models[i].rotation.x);
+        console.log("y" + models[i].rotation.y);
+        var minCameraRotX = 5;
+        var maxCameraRotX = 5.5;
+          models[i].rotation.x = Math.max( minCameraRotX, Math.min( maxCameraRotX, models[i].rotation.x ) );
+          models[i].rotation.x += ( (mouseY) - models[i].position.x ) * .00005;
+          models[i].rotation.y += ( (mouseX) - models[i].position.y ) * .00005;
+        }
+        console.log(camera.position);
+        if (isTouchDevice() && !isSafari() && !isIOS8()) {
+          controls.update();
+        } else {
+          //
+        }
+
+        camera.lookAt( scene.position );
+        renderer.render( scene, camera );
+      }
+    </script>
+
+  </body>
+</html>
