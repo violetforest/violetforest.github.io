@@ -10,8 +10,9 @@
 
   <body>
     <div class="flower">
-      <a class="next-link" href="../lipstick/">Next</a>
-
+    <button id="stop" style="position: absolute; z-index: 1000">Stop</button>
+      <!-- <a class="next-link" href="../lipstick/">Next</a> -->
+    <script src="/js/CCapture.all.min.js"></script>
     <script src="./../cara/build/three.js"></script>
     <script src="./../cara/js/loaders/OBJLoader.js"></script>
     <script id="vertexShader" type="x-shader/x-vertex">
@@ -47,11 +48,18 @@
     <script>
       var container;
       var camera, cameraBg, scene, sceneBg, renderer;
+      var canvas = document.getElementById(canvas);
       var mouseX = 0, mouseY = 0;
       var windowHalfX = window.innerWidth / 2;
       var windowHalfY = window.innerHeight / 2;
       var clock = new THREE.Clock();
-      var noiseTexture = new THREE.ImageUtils.loadTexture( 'seamless.jpg' );
+      var noiseTexture = new THREE.ImageUtils.loadTexture( '/flowers/seamless5.png' );
+      var noiseTexture2 = new THREE.ImageUtils.loadTexture( '/flowers/seamless2.png' );
+      var capturer = new CCapture( { 
+        format: 'webm',         
+        framerate: 60,
+        verbose: true } );
+      var light1, light2, light3, light4;
       noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;
 
       init();
@@ -60,32 +68,35 @@
         container = document.createElement( 'div' );
         document.body.appendChild( container );
 
+        var dVB = document.getElementById( 'stop' );
+        dVB.addEventListener( 'click', function( e ) {
+          capturer.stop();
+          this.style.display = 'none';
+          capturer.save();
+        }, false );
+
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
         camera.position.set(0, 0, 275);
-
         this.customUniforms2 = {
           baseSpeed:    { type: "f", value: 0.05 },
           noiseTexture:   { type: "t", value: noiseTexture },
           noiseScale:   { type: "f", value: 0.5337 },
           alpha:      { type: "f", value: 1.0 },
-          time:       { type: "f", value: 1.0 }
+          time:       { type: "f", value: 10.0 }
         };
 
+        this.customUniforms3 = {
+          baseSpeed:    { type: "f", value: 0.05 },
+          noiseTexture:   { type: "t", value: noiseTexture2 },
+          noiseScale:   { type: "f", value: 0.5337 },
+          alpha:      { type: "f", value: 1.0 },
+          time:       { type: "f", value: 10.0 }
+        };
         // scene
         scene = new THREE.Scene();
-
-        var ambient = new THREE.AmbientLight( 0xffccff);
-        scene.add( ambient );
-
-        var directionalLight = new THREE.DirectionalLight( 0xffccff );
-        directionalLight.position.set( 0, 0, 1 );
-        scene.add( directionalLight );
-        // model
-
-
         var texture = new THREE.Texture();
 
-        var materialNormal = new THREE.MeshNormalMaterial( { overdraw: 0.5 } );
+        var materialNormal = new THREE.MeshNormalMaterial( { overdraw: 0.1 } );
 
         var materialShader = new THREE.ShaderMaterial( {
           uniforms: customUniforms2,
@@ -93,9 +104,16 @@
           fragmentShader: document.getElementById( 'fragmentShader' ).textContent
         } );
 
+        var materialShader2 = new THREE.ShaderMaterial( {
+          uniforms: customUniforms3,
+          vertexShader: document.getElementById( 'vertexShader' ).textContent,
+          fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+        } );
+
         var manager = new THREE.LoadingManager();
         manager.onProgress = function ( item, loaded, total ) {
           console.log( item, loaded, total );
+          capturer.start();
         };
 
         var onProgress = function ( xhr ) {
@@ -106,15 +124,28 @@
         };
 
         var loader = new THREE.OBJLoader(manager);
+				const sphere = new THREE.SphereGeometry( 0.5, 16, 8 );
+				const delta = clock.getDelta();
+
+				light1 = new THREE.PointLight( 0x6824b5, 2, 75 );
+				light1.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x6824b5 } ) ) );
+				scene.add( light1 );
+
+				light2 = new THREE.PointLight( 0x00b5a8, 2, 50 );
+				light2.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x00b5a8 } ) ) );
+				scene.add( light2 );
+
+				light3 = new THREE.PointLight( 0x80ff80, 2, 50 );
+				light3.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0x80ff80 } ) ) );
+				scene.add( light3 );
+
+				light4 = new THREE.PointLight( 0xffaa00, 2, 50 );
+				light4.add( new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) ) );
+				scene.add( light4 );
 
         for ( var i = 0; i < 1; i ++ ) {
-          loader.load("obj/hand.obj", function(object) {
+          loader.load("/flowers/obj/hand.obj", function(object) {
             object.traverse(function(child) {
-              if (child instanceof THREE.Mesh) {
-                child.material.map = texture;
-                child.material = materialNormal;
-                materialNormal.side = THREE.DoubleSide;
-            }
            });
             object.position.x = 8;
             object.position.y = -3;
@@ -132,14 +163,10 @@
           });
         }
 
+        
         for ( var i = 0; i < 1; i ++ ) {
-          loader.load("obj/bouquet.obj", function(object) {
+          loader.load("/flowers/obj/bouquet.obj", function(object) {
             object.traverse(function(child) {
-              if (child instanceof THREE.Mesh) {
-                child.material.map = texture;
-                child.material = materialNormal;
-                materialNormal.side = THREE.DoubleSide;
-            }
            });
             object.position.x = 8;
             object.position.y = -3;
@@ -157,11 +184,12 @@
           });
         }
         var geometry = new THREE.PlaneBufferGeometry( (window.innerWidth), (window.innerHeight));
-        var mesh = new THREE.Mesh( geometry, materialShader );
-        mesh.position.z = -100;
-        scene.add( mesh );
+        var meshWall = new THREE.Mesh( geometry, materialShader );
+        meshWall.position.z = -800;
+        scene.add( meshWall );
+        
         //
-        renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer = new THREE.WebGLRenderer({antialias: true});
         renderer.autoClear = false;
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
@@ -172,6 +200,7 @@
         //
         window.addEventListener( 'resize', onWindowResize, false );
       }
+
       function onWindowResize() {
         windowHalfX = window.innerWidth / 2;
         windowHalfY = window.innerHeight / 2;
@@ -191,23 +220,45 @@
         customUniforms2.time.value += delta;
       }
       function render() {
-        camera.position.x += ( - mouseX - camera.position.x ) * .01;
-        camera.position.y += ( mouseY - camera.position.y ) * .01;
+        camera.position.x += ( - mouseX - camera.position.x ) * .001;
+        camera.position.y += ( mouseY - camera.position.y ) * .001;
 
-        if (camera.position.x > 80) {
-          camera.position.x = 80;
-        } else if (camera.position.x < -80) {
-          camera.position.x = -80;
+        if (camera.position.x > 120) {
+          camera.position.x = 120;
+        } else if (camera.position.x < -120) {
+          camera.position.x = -120;
         }
 
         if (camera.position.y > 30) {
           camera.position.y = 30;
-        } else if (camera.position.y < -50) {
-          camera.position.y = -50;
+        } else if (camera.position.y < -20) {
+          camera.position.y = -20;
         }
+
+        light1.position.x = Math.sin( Date.now() * 0.0005 * 0.7 ) * 2;
+				light1.position.y = Math.cos( Date.now() * 0.0005 * 0.5 ) * 40;
+				light1.position.z = Math.cos( Date.now() * 0.0005 * 0.3 ) * 30;
+
+				light2.position.x = Math.cos( Date.now() * 0.0005 * 0.3 ) * 30;
+				light2.position.y = Math.sin( Date.now() * 0.0005 * 0.5 ) * 40;
+				light2.position.z = Math.sin( Date.now() * 0.0005 * 0.7 ) * 30;
+
+				light3.position.x = Math.sin( Date.now() * 0.0005 * 0.7 ) * 30;
+				light3.position.y = Math.cos( Date.now() * 0.0005 * 0.3 ) * 40;
+				light3.position.z = Math.sin( Date.now() * 0.0005 * 0.5 ) * 30;
+
+				light4.position.x = Math.sin( Date.now() * 0.0005 * 0.3 ) * 30;
+				light4.position.y = Math.cos( Date.now() * 0.0005 * 0.7 ) * 40;
+				light4.position.z = Math.sin( Date.now() * 0.0005 * 0.5 ) * 30;
 
         camera.lookAt( scene.position );
         renderer.render( scene, camera );
+        if( capturer ) capturer.capture( renderer.domElement );
+
+        // setTimeout(function() {
+        //   capturer.stop();
+        //   capturer.save();
+        // }, 20000);
       }
     </script>
 

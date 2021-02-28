@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/violetforest/violetforest.github.io#readme",
   "dependencies": {
+    "ccapture.js": "^1.1.0",
     "mustache": "^4.0.1",
     "pug": "^3.0.0"
   }
