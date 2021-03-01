@@ -190,7 +190,7 @@
             scene.add(obj);
           });
         }
-        var geometry = new THREE.PlaneBufferGeometry( (window.innerWidth - 300), (window.innerHeight - 300));
+        var geometry = new THREE.PlaneBufferGeometry( (window.innerWidth - 400), (window.innerHeight - 400));
         var meshWall = new THREE.Mesh( geometry, materialShader );
         meshWall.position.z = -800;
         scene.add( meshWall );
