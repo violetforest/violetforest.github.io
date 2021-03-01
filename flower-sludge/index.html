@@ -72,16 +72,16 @@
         var dVB = document.getElementById( 'stop' );
         var start = document.getElementById('start');
 
-        dVB.addEventListener( 'click', function( e ) {
-          capturer.stop();
-          this.style.display = 'none';
-          capturer.save();
-        }, false );
+        // dVB.addEventListener( 'click', function( e ) {
+        //   capturer.stop();
+        //   this.style.display = 'none';
+        //   capturer.save();
+        // }, false );
 
-        start.addEventListener( 'click', function( e ) {
-          capturer.start();
-          this.style.display = 'none';
-        }, false );
+        // start.addEventListener( 'click', function( e ) {
+        //   capturer.start();
+        //   this.style.display = 'none';
+        // }, false );
 
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
         camera.position.set(0, 0, 275);
