@@ -10,7 +10,8 @@
 
   <body>
     <div class="flower">
-    <button id="stop" style="position: absolute; z-index: 1000">Stop</button>
+      <!-- <button id="start" style="position: absolute; z-index: 1000">Start</button>
+      <button id="stop" style="position: absolute; z-index: 1000; top: 30px">Stop</button> -->
       <!-- <a class="next-link" href="../lipstick/">Next</a> -->
     <script src="/js/CCapture.all.min.js"></script>
     <script src="./../cara/build/three.js"></script>
@@ -69,10 +70,17 @@
         document.body.appendChild( container );
 
         var dVB = document.getElementById( 'stop' );
+        var start = document.getElementById('start');
+
         dVB.addEventListener( 'click', function( e ) {
           capturer.stop();
           this.style.display = 'none';
           capturer.save();
+        }, false );
+
+        start.addEventListener( 'click', function( e ) {
+          capturer.start();
+          this.style.display = 'none';
         }, false );
 
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
@@ -113,7 +121,6 @@
         var manager = new THREE.LoadingManager();
         manager.onProgress = function ( item, loaded, total ) {
           console.log( item, loaded, total );
-          capturer.start();
         };
 
         var onProgress = function ( xhr ) {
@@ -183,7 +190,7 @@
             scene.add(obj);
           });
         }
-        var geometry = new THREE.PlaneBufferGeometry( (window.innerWidth), (window.innerHeight));
+        var geometry = new THREE.PlaneBufferGeometry( (window.innerWidth - 50), (window.innerHeight - 200));
         var meshWall = new THREE.Mesh( geometry, materialShader );
         meshWall.position.z = -800;
         scene.add( meshWall );
@@ -204,7 +211,7 @@
       function onWindowResize() {
         windowHalfX = window.innerWidth / 2;
         windowHalfY = window.innerHeight / 2;
-        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.aspect = window.innerWidth, window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize( window.innerWidth, window.innerHeight );
       }
@@ -220,9 +227,9 @@
         customUniforms2.time.value += delta;
       }
       function render() {
-        // camera.position.x += ( - mouseX - camera.position.x ) * .001;
-        // camera.position.y += ( mouseY - camera.position.y ) * .001;
-        camera.position.x = Math.sin( Date.now() * 0.001 * 0.3 ) * 40;
+        camera.position.x += ( - mouseX - camera.position.x ) * .001;
+        camera.position.y += ( mouseY - camera.position.y ) * .001;
+        //camera.position.x = Math.sin( Date.now() * 0.001 * 0.3 ) * 40;
 
         if (camera.position.x > 120) {
           camera.position.x = 120;
@@ -255,11 +262,6 @@
         camera.lookAt( scene.position );
         renderer.render( scene, camera );
         if( capturer ) capturer.capture( renderer.domElement );
-
-        // setTimeout(function() {
-        //   capturer.stop();
-        //   capturer.save();
-        // }, 20000);
       }
     </script>
 
