@@ -1,9 +1,9 @@
 (function(window) {
     var tones = {
         context: new (window.AudioContext || window.webkitAudioContext)(),
-        attack: 0.1,
+        attack: 1,
         release: 100,
-        volume: -1,
+        volume: 0.01,
         type: "sine",
 
         playFrequency: function(freq) {
@@ -14,12 +14,12 @@
             envelope.gain.setValueAtTime(this.volume, this.context.currentTime);
             envelope.connect(this.context.destination);
 
-            envelope.gain.setValueAtTime(1, this.context.currentTime);
-            envelope.gain.setTargetAtTime(this.volume, this.context.currentTime, this.attack / 100);
+            envelope.gain.setValueAtTime(0, this.context.currentTime);
+            envelope.gain.setTargetAtTime(this.volume, this.context.currentTime, this.attack / 1000);
 
             console.log('gain', envelope.gain.minValue)
             if (this.release) {
-                envelope.gain.setTargetAtTime(0, this.context.currentTime + this.attack / 100, this.release / 1000);
+                envelope.gain.setTargetAtTime(0, this.context.currentTime + this.attack / 1000, this.release / 1000);
                 setTimeout(function() {
                     osc.stop();
                     osc.disconnect(envelope);
@@ -36,9 +36,6 @@
             osc.connect(envelope);
 
             osc.start();
-
-            console.log('oscconnect', osc.connect(envelope));
-            console.log('oscenvelope', envelope);
         },
 
 
