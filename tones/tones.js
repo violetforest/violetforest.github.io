@@ -1,7 +1,7 @@
 (function(window) {
     var tones = {
         context: new (window.AudioContext || window.webkitAudioContext)(),
-        attack: 0.1,
+        attack: 0.005,
         release: 100,
         volume: -1,
         type: "sine",
