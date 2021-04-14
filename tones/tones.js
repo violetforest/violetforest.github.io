@@ -170,7 +170,7 @@
     };
 
     // need to create a node in order to kick off the timer in Chrome.
-    tones.context.createGain();
+    // tones.context.createGain();
 
     if (typeof define === "function" && define.amd) {
         define(tones);
