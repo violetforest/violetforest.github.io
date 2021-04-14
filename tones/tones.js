@@ -1,181 +1,346 @@
-(function(window) {
-    var tones = {
-        context: new (window.AudioContext || window.webkitAudioContext)(),
-        attack: 0.1,
-        release: 100,
-        volume: -1,
-        type: "sine",
+// ambient();
+// scoredAmbient();
+// song();
+// interactive();
+// physics();
+// piano();
 
-        playFrequency: function(freq) {
-            this.attack = this.attack || 1;
-            this.release = this.release || 1;
+var w = window.innerWidth / 2;
+var h = window.innerHeight / 2;
+var mouseX = Math.random() * 255
+var mouseY = Math.random() * 255
 
-            var envelope = this.context.createGain();
-            envelope.gain.setValueAtTime(this.volume, this.context.currentTime);
-            envelope.connect(this.context.destination);
+updateGradient();
 
-            envelope.gain.setValueAtTime(1, this.context.currentTime);
-            envelope.gain.setTargetAtTime(this.volume, this.context.currentTime, this.attack / 100);
+document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+document.addEventListener( 'touchstart', onDocumentTouchMove, false );
 
-            console.log('gain', envelope.gain.minValue)
-            if (this.release) {
-                envelope.gain.setTargetAtTime(0, this.context.currentTime + this.attack / 100, this.release / 1000);
-                setTimeout(function() {
-                    osc.stop();
-                    osc.disconnect(envelope);
-                    envelope.gain.cancelScheduledValues(tones.context.currentTime);
-                    envelope.disconnect(tones.context.destination);
-                    isDonePlaying = true;
+function updateGradient (event) {
+	if (event) {
+		mouseX = event.clientX;
+		mouseY = event.clientY;
+	}
+  var gradDeg = (mouseX / 5) + 'Deg';
+	var gradStart = 'hsl(' + mouseX + ', 100%, 75%)';
+  var gradEnd   = 'hsl(' + mouseY + ', 100%, 50%)';
 
-                }, this.attack + this.release * 1);
-            }
+  document.documentElement.style.setProperty('--grad-deg', gradDeg);
+  document.documentElement.style.setProperty('--grad-start', gradStart);
+  document.documentElement.style.setProperty('--grad-end', gradEnd);
+}
 
-            var osc = this.context.createOscillator();
-            osc.frequency.setValueAtTime(freq, this.context.currentTime);
-            osc.type = this.type;
-            osc.connect(envelope);
+document.addEventListener('mousemove', updateGradient);
 
-            osc.start();
+document.addEventListener('touchstart', function(event) {
+	if ( event.touches.length > 1 ) {
+		event.preventDefault();
 
-            console.log('oscconnect', osc.connect(envelope));
-            console.log('oscenvelope', envelope);
-        },
+	  var percentX  = event.touches[ 0 ].pageX;
+	  var gradDeg = percentX + 'Deg';
+	  var gradStart = 'hsl(' + (percentX - w) + ', 100%, 75%)';
+	  var gradEnd   = 'hsl(' + (percentX - h) + ', 50%, 50%)';
+
+		document.documentElement.style.setProperty('--grad-deg', gradDeg);
+	  document.documentElement.style.setProperty('--grad-start', gradStart)
+	  document.documentElement.style.setProperty('--grad-end', gradEnd)
+	}
+})
 
 
-        /**
-         * Usage:
-         * notes.play(440);     // plays 440 hz tone
-         * notes.play("c");     // plays note c in default 4th octave
-         * notes.play("c#");    // plays note c sharp in default 4th octave
-         * notes.play("eb");    // plays note e flat in default 4th octave
-         * notes.play("c", 2);  // plays note c in 2nd octave
-         */
-        play: function(freqOrNote, octave) {
-            if(typeof freqOrNote === "number") {
-                this.playFrequency(freqOrNote);
-            }
-            else if(typeof freqOrNote === "string") {
-                if(octave == null) {
-                    octave = 4;
-                }
-                this.playFrequency(this.map[octave][freqOrNote.toLowerCase()]);
-            }
-        },
+document.addEventListener('touchmove', function(event) {
+	if ( event.touches.length == 1 ) {
+		// event.preventDefault();
 
-        getTimeMS: function() {
-            return this.context.currentTime * 1000;
-        },
+	  var percentX  = event.touches[ 0 ].pageX;
+	  var gradDeg = percentX + 'Deg';
+	  var gradStart = 'hsl(' + (percentX - w) + ', 100%, 75%)';
+	  var gradEnd   = 'hsl(' + (percentX - h) + ', 50%, 50%)';
 
-        map: [
-        {
-            // octave 4
-            "c": 261.626,
-            "c#": 277.183,
-            "db": 277.183,
-            "d": 293.665,
-            "d#": 311.127,
-            "eb": 311.127,
-            "e": 329.628,
-            "f": 349.228,
-            "f#": 369.994,
-            "gb": 369.994,
-            "g": 391.995,
-            "g#": 415.305,
-            "ab": 415.305,
-            "a": 440,
-            "a#": 466.164,
-            "bb": 466.164,
-            "b": 493.883
-        },
-        {
-            // octave 5
-            "c": 523.251,
-            "c#": 554.365,
-            "db": 554.365,
-            "d": 587.33,
-            "d#": 622.254,
-            "eb": 622.254,
-            "e": 659.255,
-            "f": 698.456,
-            "f#": 739.989,
-            "gb": 739.989,
-            "g": 783.991,
-            "g#": 830.609,
-            "ab": 830.609,
-            "a": 880,
-            "a#": 932.328,
-            "bb": 932.328,
-            "b": 987.767
-        },
-        {
-            // octave 6
-            "c": 1046.502,
-            "c#": 1108.731,
-            "db": 1108.731,
-            "d": 1174.659,
-            "d#": 1244.508,
-            "eb": 1244.508,
-            "e": 1318.51,
-            "f": 1396.913,
-            "f#": 1479.978,
-            "gb": 1479.978,
-            "g": 1567.982,
-            "g#": 1661.219,
-            "ab": 1661.219,
-            "a": 1760,
-            "a#": 1864.655,
-            "bb": 1864.655,
-            "b": 1975.533
-        },
-        {
-            // octave 7
-            "c": 2093.005,
-            "c#": 2217.461,
-            "db": 2217.461,
-            "d": 2349.318,
-            "d#": 2489.016,
-            "eb": 2489.016,
-            "e": 2637.021,
-            "f": 2793.826,
-            "f#": 2959.955,
-            "gb": 2959.955,
-            "g": 3135.964,
-            "g#": 3322.438,
-            "ab": 3322.438,
-            "a": 3520,
-            "a#": 3729.31,
-            "bb": 3729.31,
-            "b": 3951.066
-        },
-        {
-            // octave 8
-            "c": 4186.009,
-            "c#": 4434.922,
-            "db": 4434.922,
-            "d": 4698.636,
-            "d#": 4978.032,
-            "eb": 4978.032,
-            "e": 5274.042,
-            "f": 5587.652,
-            "f#": 5919.91,
-            "gb": 5919.91,
-            "g": 6271.928,
-            "g#": 6644.876,
-            "ab": 6644.876,
-            "a": 7040,
-            "a#": 7458.62,
-            "bb": 7458.62,
-            "b": 7902.132
-        }]
-    };
+		document.documentElement.style.setProperty('--grad-deg', gradDeg);
+	  document.documentElement.style.setProperty('--grad-start', gradStart)
+	  document.documentElement.style.setProperty('--grad-end', gradEnd)
+	}
+})
 
-    // need to create a node in order to kick off the timer in Chrome.
-    // tones.context.createGain();
+function onDocumentTouchMove( event ) {
+	if ( event.touches.length == 1 ) {
+		// event.preventDefault();
+	  play();
+	  var percentX  = event.touches[ 0 ].pageY / 2;
 
-    if (typeof define === "function" && define.amd) {
-        define(tones);
-    } else {
-       window.tones = tones;
-    }
+		function play(percentX) {
+			var notes = [ "C", "D", "E", "F" ];
+		  var note = notes[Math.floor(Math.random() * notes.length)];
+		  var octave = Math.floor(Math.random() * 10);
+		  tones.play(note, octave);
+		}
+	}
+}
 
-}(window));
+var timestamp = null;
+var lastMouseX = null;
+var lastMouseY = null;
+
+function onDocumentMouseMove( event ) {
+	event.preventDefault();
+
+	 if (timestamp === null) {
+	    timestamp = Date.now();
+	    lastMouseX = event.clientX;
+	    lastMouseY = event.clientY;
+	    return;
+	  }
+
+    var now = Date.now();
+    var dt =  now - timestamp;
+    var dx = event.clientX - lastMouseX;
+    var dy = event.clientY - lastMouseY;
+    var speedX = Math.round(dx / dt * 100);
+    var speedY = Math.round(dy / dt * 100);
+
+    timestamp = now;
+    lastMouseX = event.clientX;
+    lastMouseY = event.clientY;
+
+		console.log('dx', dx, 'dy', dy)
+
+		// if (speedX < 1 && speedY < 1) {
+		//   play();
+		// }
+
+		  play();
+
+	function play() {
+		var notes = [ "C", "D", "E", "F" ];
+	  var note = notes[Math.floor(Math.random() * notes.length)];
+	  var octave = Math.floor(Math.random() * 10);
+	  tones.play(note, octave);
+	}
+}
+
+function onDocumentTouchStart( event ) {
+	// if ( event.touches.length > 1 ) {
+	// 	event.preventDefault();
+	//   play();
+	//   var percentX  = event.touches[ 0 ].pageX;
+
+	// 	function play(percentX) {
+	// 		var notes = [ "C", "D", "E", "F" ];
+	// 	  var note = notes[Math.floor(Math.random() * notes.length)];
+	// 	  var octave = Math.floor(Math.random() * 10);
+	// 	  tones.play(note, octave);
+	// 	}
+	// }
+}
+
+////////////
+// sounds
+////////////
+
+/*
+	tone types:
+	"sine",
+	"square",
+	"sawtooth",
+	"triangle",
+	"custom"
+*/
+
+// function interactive() {
+//     var types = ["sine", "square", "sawtooth", "triangle"];
+//     var typeLabel = document.createElement("h3");
+//     typeLabel.textContent = "type: " + tones.type;
+//     document.body.appendChild(typeLabel);
+
+//     var typeSlider = document.createElement("input");
+//     typeSlider.type = "range";
+//     typeSlider.min = 0;
+//     typeSlider.max = 3;
+//     typeSlider.value = types.indexOf(tones.type);
+//     typeSlider.style.width = "500px";
+//     typeSlider.addEventListener("input", function() {
+//         tones.type = types[typeSlider.value];
+//         typeLabel.textContent = "type: " + tones.type;
+//     })
+//     document.body.appendChild(typeSlider);
+
+//     var attackLabel = document.createElement("h3");
+//     attackLabel.textContent = "attack: " + tones.attack;
+//     document.body.appendChild(attackLabel);
+
+//     var attackSlider = document.createElement("input");
+//     attackSlider.type = "range";
+//     attackSlider.min = 1;
+//     attackSlider.max = 300;
+//     attackSlider.value = tones.attack;
+//     attackSlider.style.width = "500px";
+//     attackSlider.addEventListener("input", function() {
+//         tones.attack = attackSlider.value;
+//         attackLabel.textContent = "attack: " + tones.attack;
+//     })
+//     document.body.appendChild(attackSlider);
+
+//     var releaseLabel = document.createElement("h3");
+//     releaseLabel.textContent = "release: " + tones.release;
+//     document.body.appendChild(releaseLabel);
+
+//     var releaseSlider = document.createElement("input");
+//     releaseSlider.type = "range";
+//     releaseSlider.min = 1;
+//     releaseSlider.max = 300;
+//     releaseSlider.value = tones.release;
+//     releaseSlider.style.width = "500px";
+//     releaseSlider.addEventListener("input", function() {
+//         tones.release = releaseSlider.value;
+//         releaseLabel.textContent = "release: " + tones.release;
+//     })
+//     document.body.appendChild(releaseSlider);
+
+//     ambient();
+// }
+
+// function scoredAmbient() {
+//     tones.type = "triangle";
+//     tones.release = 300;
+
+//     var timing = 250;
+//     var notes = [ "C#", "D#", "F#", "D#"];
+
+//     score = [];
+//     for(var i = 0; i < 16; i++) {
+//         var note = notes[Math.floor(Math.random() * notes.length)];
+//         var octave = Math.floor(Math.random() * 10);
+//         console.log(i, ":", note, octave);
+//         score.push({
+//             note: note,
+//             octave: octave
+//         });
+//     }
+//     var index = 0;
+
+
+
+//     var prevTime = tones.getTimeMS();
+//     var elapsed = 0
+//     play();
+
+
+
+//     function play() {
+//         var now = tones.getTimeMS();
+//         elapsed += now - prevTime;
+//         if(elapsed > timing) {
+//             elapsed -= timing;
+//             var t = score[index];
+//             tones.play(t.note, t.octave);
+//             index++;
+//             index %= score.length;
+//         }
+//         prevTime = now;
+//         requestAnimationFrame(play);
+
+//     }
+
+// }
+
+// function song() {
+//     tones.type = "square";
+//     tones.attack = 20;
+//     tones.release = 200;
+
+//     var notes = "ccggaag-ffeeddc-ggffeed-ggffeed-ccggaag-ffeeddc-----",
+//         timing = 300,
+//         index = 0;
+
+//     var prevTime = tones.getTimeMS();
+//     var elapsed = 0
+//     play();
+
+
+
+//     function play() {
+//         var now = tones.getTimeMS();
+//         elapsed += now - prevTime;
+//         if(elapsed > timing) {
+//             elapsed -= timing;
+//             var note = notes.charAt(index);
+//             if(note !== "-") {
+//                 tones.play(note);
+//             }
+//             index++;
+//             index %= notes.length;
+//         }
+//         prevTime = now;
+//         requestAnimationFrame(play);
+
+//     }
+// }
+
+// function physics() {
+//     var canvas = document.createElement("canvas"),
+//         context = canvas.getContext("2d"),
+//         width = canvas.width = window.innerWidth,
+//         height = canvas.height = window.innerHeight;
+
+//     canvas.style.display = "block";
+//     document.body.style.margin = 0;
+//     document.body.appendChild(canvas);
+
+
+//     var balls = [],
+//         num = 8,
+//         gravity = 0.5;
+
+//     for(var i = 0; i < num; i++) {
+//         var size = Math.random();
+//         balls.push({
+//             x: Math.random() * width,
+//             y: Math.random() * height,
+//             vx: Math.random() * 10 - 5,
+//             vy: Math.random() * 10 - 5,
+//             radius: 10 + size * 50,
+//             freq: 350 - size * 300
+//         })
+//     }
+
+//     play();
+
+//     function play() {
+//         context.clearRect(0, 0, width, height);
+//         for(var i = 0; i < num; i++) {
+//             var ball = balls[i];
+//             ball.x += ball.vx;
+//             ball.y += ball.vy;
+//             if(ball.x + ball.radius > width) {
+//                 ball.x = width - ball.radius;
+//                 ball.vx *= -1;
+//                 tones.play(ball.freq);
+//             }
+//             else if(ball.x - ball.radius < 0) {
+//                 ball.x = ball.radius;
+//                 ball.vx *= -1;
+//                 tones.play(ball.freq);
+//             }
+//             if(ball.y + ball.radius > height) {
+//                 ball.y = height - ball.radius;
+//                 ball.vy *= -1;
+//                 if(Math.abs(ball.vy) > 2)
+//                     tones.play(ball.freq);
+//             }
+//             else if(ball.y - ball.radius < 0) {
+//                 ball.y = ball.radius;
+//                 ball.vy *= -1;
+//                 tones.play(ball.freq);
+//             }
+//             ball.vy += gravity;
+//             context.beginPath();
+//             context.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2, false);
+//             context.fill();
+//         }
+
+
+
+//         requestAnimationFrame(play);
+//     }
+// }
