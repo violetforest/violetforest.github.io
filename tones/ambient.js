@@ -3,6 +3,8 @@ var h = window.innerHeight / 2;
 var mouseX = Math.random() * 255
 var mouseY = Math.random() * 255
 
+StartAudioContext(tones.context);
+
 updateGradient();
 
 document.addEventListener( 'touchmove', onDocumentTouchMove, false );
@@ -26,7 +28,11 @@ function updateGradient (event) {
 document.addEventListener('mousemove', updateGradient);
 
 document.addEventListener('touchstart', function(event) {
+	if (tones.context.state !== 'running') {
+		tones.context.resume();
+}
 	if ( event.touches.length > 1 ) {
+		console.log("touch");
 		event.preventDefault();
 
 	  var percentX  = event.touches[ 0 ].pageX;
@@ -75,7 +81,8 @@ var lastMouseX = null;
 var lastMouseY = null;
 
 function onDocumentMouseMove( event ) {
-	event.preventDefault();
+	tones.context.resume();
+
 
 	 if (timestamp === null) {
 	    timestamp = Date.now();
@@ -88,8 +95,8 @@ function onDocumentMouseMove( event ) {
     var dt =  now - timestamp;
     var dx = event.clientX - lastMouseX;
     var dy = event.clientY - lastMouseY;
-    var speedX = Math.round(dx / dt * 50);
-    var speedY = Math.round(dy / dt * 50);
+    var speedX = Math.round(dx / dt * 100);
+    var speedY = Math.round(dy / dt * 100);
 
     timestamp = now;
     lastMouseX = event.clientX;
@@ -100,7 +107,7 @@ function onDocumentMouseMove( event ) {
 	function play() {
 		var notes = [ "C", "D", "E", "F" ];
 	  var note = notes[Math.floor(Math.random() * notes.length)];
-	  var octave = Math.floor(Math.random() * 5);
+	  var octave = Math.floor(Math.random() * 10);
 	  tones.play(note, octave);
 	}
 }
