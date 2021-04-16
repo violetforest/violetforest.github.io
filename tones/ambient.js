@@ -7,9 +7,9 @@ StartAudioContext(tones.context);
 
 updateGradient();
 
-document.addEventListener( 'touchmove', onDocumentTouchMove, false );
+document.addEventListener( 'touchstart', onDocumentTouchStart, {passive:false} );
+document.addEventListener( 'touchmove', onDocumentTouchMove, {passive:false} );
 document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-document.addEventListener( 'touchstart', onDocumentTouchMove, false );
 
 function updateGradient (event) {
 	if (event) {
@@ -28,12 +28,8 @@ function updateGradient (event) {
 document.addEventListener('mousemove', updateGradient);
 
 document.addEventListener('touchstart', function(event) {
-	if (tones.context.state !== 'running') {
-		tones.context.resume();
-	}
+	tones.context.resume();
 	if ( event.touches.length > 1 ) {
-		console.log("touch");
-		event.preventDefault();
 
 	  var percentX  = event.touches[ 0 ].pageX;
 	  var gradDeg = percentX + 'Deg';
@@ -47,10 +43,8 @@ document.addEventListener('touchstart', function(event) {
 })	
 
 document.addEventListener('touchmove', function(event) {
+	tones.context.resume();
 	if ( event.touches.length == 1 ) {
-		if (tones.context.state !== 'running') {
-			tones.context.resume();
-		}
 
 	  var percentX  = event.touches[ 0 ].pageX;
 	  var gradDeg = percentX + 'Deg';
@@ -63,11 +57,13 @@ document.addEventListener('touchmove', function(event) {
 	}
 })
 
+function onDocumentTouchStart() {
+	tones.context.resume();
+}
+
 function onDocumentTouchMove( event ) {
+	tones.context.resume();
 	if ( event.touches.length == 1 ) {
-		if (tones.context.state !== 'running') {
-			tones.context.resume();
-		}
 	  play();
 	  var percentX  = event.touches[ 0 ].pageY / 2;
 

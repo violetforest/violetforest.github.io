@@ -3,7 +3,7 @@
         context: new (window.AudioContext || window.webkitAudioContext)(),
         attack: 1,
         release: 100,
-        volume: 0.01,
+        volume: 0.1,
         type: "sine",
 
         playFrequency: function(freq) {
@@ -17,7 +17,6 @@
             envelope.gain.setValueAtTime(0, this.context.currentTime);
             envelope.gain.setTargetAtTime(this.volume, this.context.currentTime, this.attack / 1000);
 
-            console.log('gain', envelope.gain.minValue)
             if (this.release) {
                 envelope.gain.setTargetAtTime(0, this.context.currentTime + this.attack / 1000, this.release / 1000);
                 setTimeout(function() {
