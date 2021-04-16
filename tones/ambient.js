@@ -30,7 +30,7 @@ document.addEventListener('mousemove', updateGradient);
 document.addEventListener('touchstart', function(event) {
 	if (tones.context.state !== 'running') {
 		tones.context.resume();
-}
+	}
 	if ( event.touches.length > 1 ) {
 		console.log("touch");
 		event.preventDefault();
@@ -44,11 +44,13 @@ document.addEventListener('touchstart', function(event) {
 	  document.documentElement.style.setProperty('--grad-start', gradStart)
 	  document.documentElement.style.setProperty('--grad-end', gradEnd)
 	}
-})
-
+})	
 
 document.addEventListener('touchmove', function(event) {
 	if ( event.touches.length == 1 ) {
+		if (tones.context.state !== 'running') {
+			tones.context.resume();
+		}
 
 	  var percentX  = event.touches[ 0 ].pageX;
 	  var gradDeg = percentX + 'Deg';
@@ -63,7 +65,9 @@ document.addEventListener('touchmove', function(event) {
 
 function onDocumentTouchMove( event ) {
 	if ( event.touches.length == 1 ) {
-		// event.preventDefault();
+		if (tones.context.state !== 'running') {
+			tones.context.resume();
+		}
 	  play();
 	  var percentX  = event.touches[ 0 ].pageY / 2;
 
@@ -82,7 +86,6 @@ var lastMouseY = null;
 
 function onDocumentMouseMove( event ) {
 	tones.context.resume();
-
 
 	 if (timestamp === null) {
 	    timestamp = Date.now();
