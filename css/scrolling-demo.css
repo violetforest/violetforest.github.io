@@ -237,8 +237,8 @@ a.demo--current {
 	padding: 1em 0;
 }
 .page-text, ul {
-	font-size: 1.7em;
-  line-height: 1.7em;
+	font-size: 1.3em;
+	line-height: 2em;
 }
 ul {
 	margin-left: 0;
@@ -269,7 +269,7 @@ ul {
 	width: 37%;
 }
 .content__title {
-	font-size: 3.5em;
+	font-size: 3.2em;
 }
 .content__description {
 	font-size: 1.75em;
@@ -442,7 +442,7 @@ main::before {
 		font-size: 1.4em;
 	}
 	.content__title {
-		font-size: 2.5em;
+		font-size: 2.2em;
 	}
 	.demo-1 {
 		--fontsize-scroll-text: 13vw;

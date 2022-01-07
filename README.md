@@ -1,0 +1,3 @@
+- variables for generating are in index.pug
+- pug -w index.pug -o ./bio -P
+- pug -w index.pug -o ./ 

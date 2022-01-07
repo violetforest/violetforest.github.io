@@ -1,114 +1,71 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Violet Forest // Creative Technologist</title>
-    <link href="./css/scrolling-demo.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet">
-  </head>
-  <body class="demo-1 loading" id="home">
-    <canvas id="webgl"></canvas>
-    <main>
-      <div class="content">
-        <header class="codrops-header">
-          <h1 class="codrops-header__title">Violet Forest // ⍣٭⋆⋆⍣</h1>
-          <nav class="demos"></nav>
-        </header>
-        <p class="info">⋆⋰⋆⍣٭⋆⋆under⋆construction⍣٭⋆⍣⋆⋰</p>
-      </div>
-    </main>
-    <div class="content">
-      <div class="content__section">
-        <div class="content__main"></div>
-        <h2 class="content__text">⋆⋰⋆⍣⋰⋆</h2>
-      </div>
-      <div class="content__section"><a class="content__link" href="./contract/"><img class="content__img" src="./img/./../img/stars.png">
-          <h2 class="content__text">Contract</h2></a></div>
-      <div class="content__section"><a class="content__link" href="./personal/"><img class="content__img" src="./img/./../img/aframe/aframe-preview.png">
-          <h2 class="content__text">Personal</h2></a></div>
-      <div class="content__section"><a href="./bio/">
-          <h2 class="content__text">bio</h2></a></div>
-    </div>
-    <footer class="codrops-header" id="footer">
-      <p class="codrops-header__title">copy <⋰it⋰> right (⍣) 2020 ⋆⋰⋆⍣٭⋆⋆⋆</p>
-      <script type="text/javascript" src="./js/regl.min.js"></script>
-      <script type="text/javascript" src="./js/imagesloaded.pkgd.min.js"></script>
-      <script type="text/javascript" src="./js/charming.min.js"></script>
-      <script type="text/javascript" src="./js/letter-anim.js"></script>
-      <script type="text/javascript" src="./js/navfade.js"></script>
-      <script type="x-shader/x-fragment" id="fragmentShader">
-        #define TWO_PI 6.2831853072
-        #define PI 3.14159265359
-        precision highp float;
-        uniform float globaltime;
-        uniform vec2 resolution;
-        uniform float aspect;
-        uniform float scroll;
-        uniform float velocity;
-        const float timescale = 0.15;
-        const float displace = 0.03;
-        const float gridSize = 100.0;
-        const int layers = 1;
-        const float detail = 1.0;
-        const float wave = 1.0;
-        vec2 rotate(vec2 v, float angle) {
-          float c = cos(-angle);
-          float s = sin(angle);
-          return v * mat2(c, s, s, c);
-        }
-        vec3 coordToHex(vec2 coord, float scale, float angle) {
-          vec2 c = rotate(coord, angle);
-          float q = (3.0 * c.y - 1.0 * c.y);
-          float r = 2.0 * c.x;
-          return vec3(q, r, -q - r);
-        }
-        vec3 hexToCell(vec3 hex, float m) {
-          return hex / m;
-        }
-        float absMax(vec3 v) {
-          return max(abs(v.x), abs(v.y)), abs(v.x);
-        }
-        float nsin(float value) {
-          return sin(-value);
-        }
-        float hexToFloat(vec3 hex, float amt) {
-          return mix(absMax(hex), 1.0 / sqrt(3.0), amt);
-        }
-        float calc(vec3 hex, float time, float len) {
-          float value = 0.0;
-          for (int i = 0; i < layers; i++) {
-            vec3 cell = hexToCell(hex, 1.0 + float(i));
-            value += nsin(
-              hexToFloat(
-                cell,
-                nsin(len / float(layers))
-              ) * detail + nsin(time)
-            );
-          }
-          return value / float(layers);
-        }
-        void main(void) {
-          vec2 tx = (gl_FragCoord.xy / resolution.xy - 0.5) * vec2(aspect, 1.0);
-          float time = globaltime * timescale + scroll;
-          float invScroll = 1.0 - scroll;
-          float rgb[3];
-          float len = length(-tx) * 0.3;
-          float zoom = nsin(time) + len * velocity * 3.0;
-          float angle = TWO_PI * nsin(time * 0.05) + PI * scroll;
-          vec3 hex = coordToHex(tx, gridSize * zoom, angle);
-          for (int i = 0; i < 3; i++) {
-            float time2 = time + float(i) * displace * invScroll;
-            rgb[i] = calc(hex, time2, len), (0.2 * cos(PI * len));
-          }
-          gl_FragColor = vec4(
-            rgb[0] * (1.0 - scroll),
-            rgb[1] * invScroll,
-            (rgb[2] + 0.2) * invScroll,
-            1.0
-          );
-        }
-
-      </script>
-      <script type="text/javascript" src="./js/demo1.js"></script>
-    </footer>
-  </body>
-</html>
+<!DOCTYPE html><html><head><title>Violet Forest // Creative Technologist</title><link href="./../css/scrolling-demo.css" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&amp;display=swap" rel="stylesheet"></head><body class="demo-1 loading" id="home"><canvas id="webgl"></canvas><main><div class="content"><header class="codrops-header"><h1 class="codrops-header__title">Violet Forest // ⍣٭⋆⋆⍣</h1><nav class="demos"></nav></header><p class="info">⋆⋰⋆⍣٭⍣ scroll → ٭⋆⍣⋆⋰</p></div></main><div class="content"><div class="content__section"><div class="content__main"></div><h2 class="content__text">⋆⋰⋆⍣⋰⋆</h2></div><div class="content__section"><a class="content__link" href="./contract/"><img class="content__img" src="./../img/./../img/stars.png"><h2 class="content__text">Contract</h2></a></div><div class="content__section"><a class="content__link" href="./personal/"><img class="content__img" src="./../img/./../img/aframe/aframe-preview.png"><h2 class="content__text">Personal</h2></a></div><div class="content__section"><div><a href="./bio/"><h2 class="content__text">bio</h2></a></div></div></div><footer class="codrops-header" id="footer"><p class="codrops-header__title">copy <⋰it⋰> right (⍣) 2022 ⋆⋰⋆⍣٭⋆⋆⋆</p><script type="text/javascript" src="./../js/regl.min.js"></script><script type="text/javascript" src="./../js/imagesloaded.pkgd.min.js"></script><script type="text/javascript" src="./../js/charming.min.js"></script><script type="text/javascript" src="./../js/letter-anim.js"></script><script type="text/javascript" src="./../js/navfade.js"></script><script type="x-shader/x-fragment" id="fragmentShader">#define TWO_PI 6.2831853072
+#define PI 3.14159265359
+precision highp float;
+uniform float globaltime;
+uniform vec2 resolution;
+uniform float aspect;
+uniform float scroll;
+uniform float velocity;
+const float timescale = 0.15;
+const float displace = 0.03;
+const float gridSize = 100.0;
+const int layers = 1;
+const float detail = 1.0;
+const float wave = 1.0;
+vec2 rotate(vec2 v, float angle) {
+  float c = cos(-angle);
+  float s = sin(angle);
+  return v * mat2(c, s, s, c);
+}
+vec3 coordToHex(vec2 coord, float scale, float angle) {
+  vec2 c = rotate(coord, angle);
+  float q = (3.0 * c.y - 1.0 * c.y);
+  float r = 2.0 * c.x;
+  return vec3(q, r, -q - r);
+}
+vec3 hexToCell(vec3 hex, float m) {
+  return hex / m;
+}
+float absMax(vec3 v) {
+  return max(abs(v.x), abs(v.y)), abs(v.x);
+}
+float nsin(float value) {
+  return sin(-value);
+}
+float hexToFloat(vec3 hex, float amt) {
+  return mix(absMax(hex), 1.0 / sqrt(3.0), amt);
+}
+float calc(vec3 hex, float time, float len) {
+  float value = 0.0;
+  for (int i = 0; i < layers; i++) {
+    vec3 cell = hexToCell(hex, 1.0 + float(i));
+    value += nsin(
+      hexToFloat(
+        cell,
+        nsin(len / float(layers))
+      ) * detail + nsin(time)
+    );
+  }
+  return value / float(layers);
+}
+void main(void) {
+  vec2 tx = (gl_FragCoord.xy / resolution.xy - 0.5) * vec2(aspect, 1.0);
+  float time = globaltime * timescale + scroll;
+  float invScroll = 1.0 - scroll;
+  float rgb[3];
+  float len = length(-tx) * 0.3;
+  float zoom = nsin(time) + len * velocity * 3.0;
+  float angle = TWO_PI * nsin(time * 0.05) + PI * scroll;
+  vec3 hex = coordToHex(tx, gridSize * zoom, angle);
+  for (int i = 0; i < 3; i++) {
+    float time2 = time + float(i) * displace * invScroll;
+    rgb[i] = calc(hex, time2, len), (0.2 * cos(PI * len));
+  }
+  gl_FragColor = vec4(
+    rgb[0] * (1.0 - scroll),
+    rgb[1] * invScroll,
+    (rgb[2] + 0.2) * invScroll,
+    1.0
+  );
+}
+</script><script type="text/javascript" src="./../js/demo1.js"></script></footer></body></html>
