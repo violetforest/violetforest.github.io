@@ -1,5 +1,5 @@
 - var isHome = false
-- var content = 'contract';
+- var content = 'ai';
 doctype html
 html(lang=en)
   include includes/head.pug
@@ -16,6 +16,8 @@ html(lang=en)
         include includes/contract.pug
       else if content === 'personal'
         include includes/personal.pug
+      else if content === 'ai'
+        include includes/ai.pug
       else if content === 'archive'
         include includes/archive.pug
       else if content === 'bio'

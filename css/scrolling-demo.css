@@ -16,6 +16,12 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+body p {
+	line-height: 2.1em;
+	line-height: 1.8em;
+    letter-spacing: 0.02em;
+}
+
 a {
 	text-decoration: none;
 	color: var(--color-link);
@@ -75,6 +81,11 @@ video {
 	display: inline-block;
 }
 
+.grid-3 {
+	width: 33%;
+	display: inline-block;
+}
+
 .half-video {
 	width:50%;
 	height:auto;
@@ -93,6 +104,14 @@ video {
 	width: 75%;
 	display: block;
 	padding: 0 calc(6vmax - 0.25rem) calc(6vmax - 0.25rem);
+}
+
+.content__details--no-padding {
+	padding: 0 !important;
+}
+
+.no-padding {
+	padding: 0 !important;
 }
 
 .content__details__img {
@@ -223,6 +242,11 @@ a.demo--current {
 .caption {
 	font-style: italic;
 	font-size: 1.5em;
+	padding-bottom: 1.6em;
+}
+.caption--article {
+	padding-top: 0.8em;
+	padding-bottom: 0;
 }
 .tech-tag {
 	margin:auto;
