@@ -1,10 +1,11 @@
 - var isHome = false
-- var content = 'ai';
+- var content = 'bio';
 doctype html
 html(lang=en)
   include includes/head.pug
-
   body(id=isHome ? "home" : "page" class="demo-1 loading" )
+    div(class="loader" id="loader")
+      div.spinner
     if isHome
       canvas(id=isHome ? "webgl" : "page" class="")
     include includes/header.pug
@@ -25,3 +26,5 @@ html(lang=en)
 
     if isHome
       include includes/foot.pug
+
+script(src="../js/loader.js")

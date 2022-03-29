@@ -74,6 +74,7 @@ main {
 video {
 	margin: auto;
 	width: 100%;
+	z-index: 1;
 }
 
 .grid {
@@ -139,6 +140,33 @@ video {
 	.mySlides img {
 		height: 300px;
 	}
+}
+
+.loading {
+	overflow: hidden;
+}
+
+.loader {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: black;
+    opacity: 1;
+	overflow: hidden;
+	z-index: 100;
+}
+
+.loader:after {
+	content: "♡ loading ♡";
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
+    font-size: 2em;
+    display: block;
+    margin: auto;
+    width: 175px;
 }
 
 .content__details__img {
