@@ -142,10 +142,6 @@ video {
 	}
 }
 
-.loading {
-	overflow: hidden;
-}
-
 .loader {
 	position: absolute;
     top: 0;

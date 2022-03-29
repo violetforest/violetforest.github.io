@@ -1,11 +1,9 @@
-- var isHome = true
-- var content = 'ai';
+- var isHome = false
+- var content = 'personal';
 doctype html
 html(lang=en)
   include includes/head.pug
   body(id=isHome ? "home" : "page" class="demo-1 loading" )
-    div(class="loader" id="loader")
-      div.spinner
     if isHome
       canvas(id=isHome ? "webgl" : "page" class="")
     include includes/header.pug
