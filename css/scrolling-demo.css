@@ -86,6 +86,13 @@ video {
 	display: inline-block;
 }
 
+@media (max-width: 900px) {
+	.grid-3 {
+		width: 100%;
+		display: block;
+	}
+}
+
 .half-video {
 	width:50%;
 	height:auto;
@@ -116,6 +123,22 @@ video {
 
 .no-padding {
 	padding: 0 !important;
+}
+
+.mySlides img, .mySlides button, .mySlides p, .slideshow-buttons {
+	display: block;
+	margin: auto;
+	text-align: center;
+}
+
+.mySlides img {
+	height: 500px;
+}
+
+@media (max-width: 900px) {
+	.mySlides img {
+		height: 300px;
+	}
 }
 
 .content__details__img {
