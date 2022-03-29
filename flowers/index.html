@@ -108,7 +108,7 @@
         var loader = new THREE.OBJLoader(manager);
 
         for ( var i = 0; i < 1; i ++ ) {
-          loader.load("obj/hand.obj", function(object) {
+          loader.load("./obj/hand.obj", function(object) {
             object.traverse(function(child) {
               if (child instanceof THREE.Mesh) {
                 child.material.map = texture;
@@ -133,7 +133,7 @@
         }
 
         for ( var i = 0; i < 1; i ++ ) {
-          loader.load("obj/bouquet.obj", function(object) {
+          loader.load("./obj/bouquet.obj", function(object) {
             object.traverse(function(child) {
               if (child instanceof THREE.Mesh) {
                 child.material.map = texture;
