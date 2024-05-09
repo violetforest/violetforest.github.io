@@ -3,6 +3,9 @@ const fullscreen = document.getElementsByTagName("body")[0];
 let cursortext = null;
 document.addEventListener("DOMContentLoaded", () => {
   new cursoreffects.trailingCursor({ element: fullscreen });
+  setTimeout(function() {
+    document.getElementsByClassName('button')[0].style.opacity = 1;
+  }, 20000); // 20000 milliseconds = 20 seconds
 });
 
 import * as THREE from "./three.module.js";
