@@ -4,7 +4,7 @@ body {
   margin: 0;
 }
 
-body{ cursor: url('./../cursor.cur'), auto;}
+body{ cursor: url('./cursor.cur'), auto;}
 
 html, body {
   position: relative;
