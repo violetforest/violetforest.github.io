@@ -10,12 +10,12 @@ import { GLTFLoader } from "./GLTFLoader.js";
 
 // Array of .glb file names
 const emojiModels = [
-  './heart.gltf',
-  './omg.gltf',
-  './lol.gltf',
-  './sad.gltf',
-  './angry.gltf',
-  './like.gltf'
+  './../metaverse/heart.gltf',
+  './../metaverse/omg.gltf',
+  './../metaverse/lol.gltf',
+  './../metaverse/sad.gltf',
+  './../metaverse/angry.gltf',
+  './../metaverse/like.gltf'
 ]
 
 // Declare everything we know we're going to need (or eventually need);

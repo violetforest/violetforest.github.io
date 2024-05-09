@@ -68,7 +68,7 @@ body{ cursor: url('./../cursor.cur'), auto;}
   left:0;
   right:0;
   bottom:0;
-  background-image: url(./tunnel/grid.jpeg);
+  background-image: url(./../tunnel/grid.jpeg);
   transform: translateZ(-1px);
   animation: 5s left linear infinite;
 }
@@ -104,7 +104,7 @@ body{ cursor: url('./../cursor.cur'), auto;}
   width: 1200px;
   height: 200px;
   transform:  translateX(-400px) translateY(600px) translateZ(-100px) rotateY(90deg) rotateZ(90deg);
-  background-image: url(./tunnel/grid.jpeg);
+  background-image: url(./../tunnel/grid.jpeg);
   animation: 5s right linear infinite;
 
 }
@@ -115,7 +115,7 @@ body{ cursor: url('./../cursor.cur'), auto;}
   left:-10px;
   right:-10px;
   bottom:0px;
-  background-image: url(./tunnel/grid.jpeg);
+  background-image: url(./../tunnel/grid.jpeg);
   animation: 5s top linear infinite;
 }
 
@@ -126,7 +126,7 @@ body{ cursor: url('./../cursor.cur'), auto;}
   width: 220px;
   height: 1200px;
   margin: -600px -110px;  
-  background-image: url(./tunnel/grid.jpeg);
+  background-image: url(./../tunnel/grid.jpeg);
   transform: translateY(101px) rotateX(90deg);
 	animation: 5s bottom linear infinite;
 }
