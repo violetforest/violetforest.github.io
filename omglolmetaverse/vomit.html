@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vomit</title>
+    <style>
+        body {
+            color: white; /* Set text color to white for better visibility on random backgrounds */
+            font-family: Arial, sans-serif; /* Set a nice font for the text */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        a {
+            color: inherit; /* Ensures the link is the same color as the normal text */
+            text-decoration: none; /* Removes underline from the link */
+        }
+        a:hover {
+            text-decoration: underline; /* Adds underline on hover for the link */
+        }
+        .interactable { /* Class for elements that are interactive */
+            cursor: grab; /* Sets the cursor to 'grab' */
+        }
+        .interactable:active { /* Styles when the interactable elements are clicked */
+            cursor: grabbing; /* Changes cursor to 'grabbing' when the element is actively clicked */
+        }
+    </style>
+</head>
+<body>
+    <h1 id="headerText"></h1>
+
+    <script>
+        function getRandomColor() {
+            const colors = ['#2ad0ca', '#e1f664', '#feb0fe', '#abb3fc', '#5df7a4', '#58c4f6'];
+            const randomIndex = Math.floor(Math.random() * colors.length);
+            return colors[randomIndex];
+        }
+
+        function setupContent() {
+            const headerText = document.getElementById('headerText');
+            const keyFound = localStorage.getItem('keyFound') === 'true'; // Check if key has already been found
+            const isKey = !keyFound && Math.random() < 0.1; // 10% chance, only if key hasn't been found
+            const isDoor = Math.random() < 0.1; // 10% chance
+
+            headerText.innerHTML = ''; // Always clear previous content
+
+            if (isKey) {
+                headerText.innerHTML = '<span class="interactable" id="keyLink"><img width="50px" height="100%" src="./key.png"></span>';
+                document.getElementById('keyLink').addEventListener('click', function(event) {
+                    alert('Oh? A key...');
+                    localStorage.setItem('keyFound', 'true');
+                    headerText.innerHTML = "";
+                });
+            } else if (isDoor) {
+                headerText.innerHTML = '<span class="interactable" id="doorLink"><img width="100px" height="100%" src="./door.png"></span>';
+                document.getElementById('doorLink').addEventListener('click', function(event) {
+                    event.preventDefault(); // Prevent the default action
+                    let keyState = localStorage.getItem('keyFound');
+                    if (keyState === 'true') {
+                        window.open('./../tunnel');
+                        localStorage.clear();
+                    } else {
+                        alert('It\'s locked...');
+                    }
+                });
+            } else {
+                // Set color change interval
+                setInterval(function() {
+                    document.body.style.backgroundColor = getRandomColor();
+                }, 1000);
+            }
+        }
+
+        document.body.style.backgroundColor = getRandomColor();
+        setupContent(); // Initialize the content setup
+    </script>
+</body>
+</html>
