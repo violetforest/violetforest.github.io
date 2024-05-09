@@ -60,7 +60,7 @@
                     event.preventDefault(); // Prevent the default action
                     let keyState = localStorage.getItem('keyFound');
                     if (keyState === 'true') {
-                        window.open('/tunnel.html');
+                        window.open('./tunnel/tunnel.html');
                         localStorage.clear();
                     } else {
                         alert('It\'s locked...');
