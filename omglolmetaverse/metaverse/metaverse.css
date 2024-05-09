@@ -1,4 +1,4 @@
-body{ cursor: url('./cursor.cur'), auto;}
+body{ cursor: url('./../cursor.cur'), auto;}
 
 /* Basic Reset */
 * {
