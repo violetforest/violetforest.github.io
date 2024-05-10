@@ -4,7 +4,9 @@ body {
   margin: 0;
 }
 
-body{ cursor: url('./cursor.cur'), auto;}
+body { 
+  cursor: url('./cursor.cur'), auto;
+}
 
 html, body {
   position: relative;
@@ -41,6 +43,7 @@ html, body {
   height: 200px;
 
   background-blend-mode: screen, difference, normal;
+  cursor: col-resize;
 }
 
 .carousel-image input {

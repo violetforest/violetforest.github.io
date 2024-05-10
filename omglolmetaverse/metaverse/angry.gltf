@@ -1174,7 +1174,7 @@
         {
             "bufferView" : 4,
             "mimeType" : "image/png",
-            "name" : "Button_Angry_BaseColor"
+            "name" : "./Button_Angry_BaseColor.png"
         }
     ],
     "accessors" : [

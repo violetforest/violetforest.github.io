@@ -25,8 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   gsap.ticker.add(animate);
-  alert("Haha! I loooove spinning!");
-
 });
 
 const progress = {
@@ -105,9 +103,6 @@ function checkSpin(currentValue) {
   if (previousValue < 0.05 && currentValue > 0.95) {
     direction = 0;
     lol.value += "lo";
-    if (lol.value.length >= lol.maxLength){
-      alert("hahaha! now spin me the other way!")
-    }
   }
   previousValue = currentValue;
 }
@@ -134,3 +129,4 @@ const animate = () => {
 };
 
 gsap.ticker.add(animate);
+alert("Haha! I loooove spinning!");

@@ -586,7 +586,7 @@
         {
             "bufferView" : 4,
             "mimeType" : "image/png",
-            "name" : "Button_Wow_Base_Color"
+            "name" : "./Button_Wow_Base_Color.png"
         }
     ],
     "accessors" : [
