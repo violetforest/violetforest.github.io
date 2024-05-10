@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
   new cursoreffects.trailingCursor({ element: fullscreen });
   setTimeout(function() {
     document.getElementsByClassName('button')[0].style.opacity = 1;
-  }, 20000); // 20000 milliseconds = 20 seconds
+  }, 20000);
 });
 
 import * as THREE from "./three.module.js";
@@ -147,7 +147,7 @@ setInterval(function switchModelMouse() {
   }
 
   loademojiModel();
-}, 5000);
+}, 3000);
 
 
 setInterval(function switchModelCenter() {
@@ -156,7 +156,7 @@ setInterval(function switchModelCenter() {
   }
 
   loadSecondemoji();
-}, 10000);
+}, 7000);
 
 setInterval(function switchCursorText() {
   //cursortext.destroy()
