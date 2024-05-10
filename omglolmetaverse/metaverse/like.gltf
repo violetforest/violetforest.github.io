@@ -359,7 +359,7 @@
         {
             "bufferView" : 4,
             "mimeType" : "image/png",
-            "name" : "Button_Like_BaseColor"
+            "name" : "./Button_Like_BaseColor.png"
         }
     ],
     "accessors" : [

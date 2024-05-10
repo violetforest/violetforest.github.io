@@ -789,7 +789,7 @@
         {
             "bufferView" : 4,
             "mimeType" : "image/png",
-            "name" : "Button_Sad_Base_Color"
+            "name" : "./Button_Sad_Base_Color.png"
         }
     ],
     "accessors" : [

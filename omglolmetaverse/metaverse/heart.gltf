@@ -249,7 +249,7 @@
         {
             "bufferView" : 4,
             "mimeType" : "image/png",
-            "name" : "Button_Love_BaseColor"
+            "name" : "./Button_Love_BaseColor.png"
         }
     ],
     "accessors" : [

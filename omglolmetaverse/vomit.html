@@ -42,8 +42,8 @@
         function setupContent() {
             const headerText = document.getElementById('headerText');
             const keyFound = localStorage.getItem('keyFound') === 'true'; // Check if key has already been found
-            const isKey = !keyFound && Math.random() < 0.1; // 10% chance, only if key hasn't been found
-            const isDoor = Math.random() < 0.1; // 10% chance
+            const isKey = !keyFound && Math.random() < 0.2; // 10% chance, only if key hasn't been found
+            const isDoor = Math.random() < 0.2; // 10% chance
 
             headerText.innerHTML = ''; // Always clear previous content
 

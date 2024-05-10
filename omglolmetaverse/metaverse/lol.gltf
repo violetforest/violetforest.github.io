@@ -518,7 +518,7 @@
         {
             "bufferView" : 4,
             "mimeType" : "image/png",
-            "name" : "Button_Haha_Base_Color"
+            "name" : "./Button_Haha_Base_Color.png"
         }
     ],
     "accessors" : [
