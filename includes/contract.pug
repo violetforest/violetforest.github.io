@@ -166,11 +166,17 @@ div(class="content")
     p.page-text
       | I was hired to make a mobile app that can detect the shape of a heart candy & place augmented reality on top of it. This research had led me to experiment with openCVforUnity contour detection, color detection, and training a haar cascade for object detection. In the end I settled on using openCVforUnity contour detection to trigger ARfoundation’s pointcloud feature detection.
     p.page-text
-      | My research in computer vision has sparked my interest in machine learning and computer vision in general, and I am continuing my research with things like Google’s new open-source Mediapipe for handtracking, where I am collaborating on building an app to control open-source prosthetics with a mobile app.
+      | My research in computer vision has sparked my interest in machine learning and computer vision in general, and I am continuing my research with things like Google’s new open-source Mediapipe for handtracking, where I collaborated on building an app to control open-source prosthetics with a mobile app.
 
-    div(class="content__details")
-      iframe(src="https://player.vimeo.com/video/437898670?portrait=0" style="width:100%;height:600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen)
-        script(src="https://player.vimeo.com/api/player.js")
+    div.grid
+      div(class="content__details__img center")
+        video(width='100%', height='600px', playsinline, autoplay, muted, loop)
+          source(src='./../img/2017/candyapp-ui.mp4', type='video/mp4')
+
+    div.grid
+      div
+        iframe(src="https://player.vimeo.com/video/437898670?portrait=0" style="width:100%;height:600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen)
+          script(src="https://player.vimeo.com/api/player.js")
 
     div(class="content__details__img center")
       video(width='100%', height='600px', playsinline, autoplay, muted, loop)
