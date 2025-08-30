@@ -1,0 +1,65 @@
+extends ./../layout.pug
+block content
+  div(class="content")
+    div(class="content__details")
+      h1.content__title Floodplains.xyz (2022)
+      div.tech-tag__container
+        span.tech-tag WebVR         
+
+      p.page-text
+        | Landing page for a WebGL Game, with crypto wallet integration.
+    
+      div(class="content__details__img center")
+        video(width='100%', height='600px', playsinline, autoplay, muted, loop)
+          source(src='./../vid/2023/floodplains/floodplains1.mp4', type='video/mp4')
+
+  div(class="content")
+    div(class="content__details")
+      h1.content__title React Developer for Hicetnunc.xyz (2021)
+      div.tech-tag__container
+        span.tech-tag UI
+      p.page-text
+        | Prototyped a follow feature, a price-hover feature, introduced the masonry layout, and coded the filter function for the primary/secondary market.
+
+      div
+        iframe(src="https://player.vimeo.com/video/993275710?portrait=0" style="width:100%;height:600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen)
+          script(src="https://player.vimeo.com/api/player.js")
+    
+  .content
+    div(class="content__details")
+      h1.content__title Kiosk Web Development (2018-2017)
+      div.tech-tag__container
+        span.tech-tag Wordpress         
+      p.page-text
+        | Developed a website with of a media-heavy double carousel of video clips, audio clips, and text for 50 different stories. 
+        | The project was done in collaboration with the designers and creative directors of SOCIALDEVIANT, a creative digital agency in Chicago, Illinois.
+
+      div(class="center content__details__img")
+        img(class="center content__details__img" src="./../img/contract/redwing.jpg")
+        img(class="center content__details__img" src="./../img/contract/kiosk1.jpg")
+        img(class="center content__details__img" src="./../img/contract/kiosk2.jpg")
+  .content
+    div(class="content__details")
+      h1.content__title Front-End Development (2018-2015)
+      div.tech-tag__container
+        span.tech-tag node.js
+        span.tech-tag HTML/CSS
+        span.tech-tag React
+        span.tech-tag Pug
+        span.tech-tag YAML
+        span.tech-tag Angular
+        span.tech-tag Stylus
+        span.tech-tag Wordpress
+      p.page-text
+        | I had the privilege to work in collaboration with the developers from agencies Someoddpilot and Branger Briz on the Patagonia Actionworks app.
+      p.page-text
+        | I also worked with several other design studios in Chicago making landing pages for desktop and mobile sites.
+
+      div(class="center content__details__img")
+        img(class="center content__details__img" src="./../img/contract/paw.jpg")
+        img(class="center content__details__img" src="./../img/contract/saucony.gif")
+        img(class="center content__details__img" src="./../img/contract/prokeds.gif")
+        img(class="center content__details__img" src="./../img/contract/sop-site.gif")
+        img(class="center content__details__img" src="./../img/contract/pw-site.gif")
+
+      include ./../partials/back.pug

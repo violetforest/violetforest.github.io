@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>💗🏢🏩</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Exo+2:300|VT323" rel="stylesheet">
+    <link href="./../cara/css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <a class="next-link blink-type" href="./../bio2/">next</a>
+    <div id="WebGL-output">
+    </div>
+
+    <script src="./../cara/build/three.js"></script>
+    <script src="./../cara/js/Detector.js"></script>
+    <script src="./../cara/js/jquery.js"></script>
+    <script src="./../cara/js/loaders/OBJLoader.js"></script>
+
+    <script id="fragmentShader" type="x-shader/x-vertex">
+      uniform vec3 glowColor;
+      varying float intensity;
+      void main() {
+        vec3 glow = glowColor * intensity;
+          gl_FragColor = vec4( glow, 0.5 );
+      }
+    </script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+      uniform vec3 viewVector;
+      uniform float c;
+      uniform float p;
+      varying float intensity;
+      void main() {
+        vec3 vNormal = normalize( normalMatrix * normal );
+        vec3 vNormel = normalize( normalMatrix * viewVector );
+        intensity = pow( c - dot(vNormal, vNormel), p );
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+    </script>
+
+    <script>
+      // detect mobile OS because point lights don't work on some android phones
+      var usePointLights;
+      if ( /Android/i.test(navigator.userAgent) ) {
+        usePointLights = false;
+      } else {
+        usePointLights = true;
+      };
+    </script>
+    <script>
+      var texture = new THREE.Texture();
+      var buildingMesh, buildingMesh2;
+      var monolithMat
+      if (usePointLights) {
+        monolithMat  = new THREE.MeshPhongMaterial( {color: 0x244876, shininess: 0, specular: 0});
+      } else {
+        monolithMat = new THREE.MeshLambertMaterial( { color: 0xfa5c9d, emissive: 0x7d0024} );
+      }
+      var clock = new THREE.Clock();
+
+      var manager = new THREE.LoadingManager();
+      manager.onProgress = function ( item, loaded, total ) {
+      console.log( item, loaded, total );
+
+      var rowZ = 0;
+      var meshObj = [];
+      for (r = 0; r < 10; r++){
+        rowZ -= 10;
+        for (var i = 0; i < 10; i++) {
+          var meshes = [buildingMesh, buildingMesh2],
+          randomMesh = meshes[Math.floor(Math.random() * meshes.length)];
+          console.log( "randomMesh" + randomMesh );
+
+          meshObj[i] = randomMesh.clone();
+          meshObj[i].position.x = i * 10;
+          meshObj[i].position.y = 0;
+          meshObj[i].position.z = rowZ;
+
+          var rand = Math.ceil(Math.random() * (4 - 2) + 2);
+          meshObj[i].scale.y = rand;
+          meshObj[i].scale.x = 3.5;
+          meshObj[i].scale.z = 3.5;
+
+          obj = meshObj[i];
+          scene.add(obj);
+        }
+      }
+    }
+
+    var onProgress = function ( xhr ) {
+      if ( xhr.lengthComputable ) {
+        var percentComplete = xhr.loaded / xhr.total * 100;
+        console.log( Math.round(percentComplete, 2) + '% downloaded' );
+      }
+    };
+
+    var loader = new THREE.OBJLoader(manager);
+
+    loader.load("obj/building4.obj", function(object) {
+      object.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+          child.material.map = texture;
+          child.material = monolithMat;
+          monolithMat.side = THREE.DoubleSide;
+          buildingMesh = new THREE.Mesh(child.geometry, child.material);
+        }
+      });
+    });
+
+    loader.load("obj/building5.obj", function(object) {
+      object.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+          child.material.map = texture;
+          child.material = monolithMat;
+          monolithMat.side = THREE.DoubleSide;
+          buildingMesh2 = new THREE.Mesh(child.geometry, materialGlow);
+        }
+      });
+    });
+
+    loader.load("obj/heart.obj", function(object) {
+      object.traverse(function(child) {
+        if (child instanceof THREE.Mesh) {
+          child.material.map = texture;
+          child.material = materialGlow2;
+          materialGlow2.side = THREE.DoubleSide;
+          mesh8 = new THREE.Mesh(child.geometry, child.material);
+        }
+      });
+
+      var rowZ = 0;
+      var meshObj = [];
+
+      for (r = 0; r < 10; r++){
+        rowZ -= 10;
+        for (var i = 0; i < 10; i++) {
+          meshObj[i] = mesh8.clone();
+
+          var rand = Math.ceil(Math.random() * (20 - 5) + 21);
+          meshObj[i].position.x = i * 10;
+          meshObj[i].position.y = rand;
+          meshObj[i].position.z = rowZ;
+
+          meshObj[i].scale.y = 1;
+          meshObj[i].scale.x = 1;
+          meshObj[i].scale.z = 1;
+
+          obj = meshObj[i];
+          scene.add(obj);
+          models.push(obj);
+        }
+      }
+    });
+    var models = [];
+
+    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(45, window.innerWidth /window.innerHeight, 0.1, 1000);
+      var renderer = new THREE.WebGLRenderer();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      scene.background = new THREE.Color( 0x2d004d );
+      scene.fog = new THREE.FogExp2( 0x2d004d, 0.01 );
+
+      var groundGeo = new THREE.PlaneGeometry(400, 400, 4 , 4);
+      var groundMat = new THREE.MeshPhongMaterial( {color: 0x244876, shininess: 0, specular: 0});;
+      var ground = new THREE.Mesh(groundGeo, groundMat);
+      ground.material.side = THREE.DoubleSide;
+
+      scene.add(ground);
+
+      ground.position.x = 140;
+      ground.position.y = 0;
+      ground.position.z = -150;
+      ground.rotation.x = -1.55;
+
+      camera.position.x = 0;
+      camera.position.y = 25;
+      camera.position.z = 0;
+
+      camera.rotation.y = -0.785398163;
+      camera.rotation.z = -0.280;
+      camera.rotation.x = -0.400;
+
+      var directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+      directionalLight.position.set( -20, 10, 30 );
+      scene.add( directionalLight );
+
+      var pointLight = new THREE.PointLight( 0xff000c, 10, 100 );
+      scene.add(pointLight);
+
+      var materialGlow = new THREE.ShaderMaterial({
+        uniforms: {
+        "c":   { type: "f", value: 0.8 },
+        "p":   { type: "f", value: 0.15 },
+        glowColor: { type: "c", value: new THREE.Color(0x244876) },
+        viewVector: { type: "v3", value: camera.position }
+      },
+        vertexShader:   document.getElementById( 'vertexShader'   ).textContent,
+        fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true
+      });
+
+      var materialGlow2 = new THREE.ShaderMaterial({
+        uniforms: {
+        "c":   { type: "f", value: 0.5 },
+        "p":   { type: "f", value: 0.14 },
+        glowColor: { type: "c", value: new THREE.Color(0xFFA5D2) },
+        viewVector: { type: "v3", value: camera.position }
+      },
+        vertexShader:   document.getElementById( 'vertexShader'   ).textContent,
+        fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
+        side: THREE.FrontSide,
+        blending: THREE.AdditiveBlending,
+        transparent: true
+      });
+
+      onWindowResize();
+      window.addEventListener( 'resize', onWindowResize, false );
+
+      render();
+
+
+      function onWindowResize( event ) {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+      }
+
+      function render() {
+        requestAnimationFrame(render);
+        camera.position.z -= 0.01;
+        camera.position.x += 0.01;
+
+        if (camera.position.x > 40 && camera.position.z < -40) {
+          camera.position.z = -40;
+          camera.position.x = 40;
+        }
+
+        pointLight.position.set(camera.position.x,camera.position.y,camera.position.z);
+        renderer.render(scene, camera);
+
+        var delta = clock.getDelta();
+
+        for (i = 0; i < models.length; i++) {
+          models[i].rotation.y += delta * 0.8 * ( i % 2 ? 1 : -1 );
+        }
+      };
+
+      $("#WebGL-output").append(renderer.domElement);
+    </script>
+
+  </body>
+</html>

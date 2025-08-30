@@ -1,0 +1,15 @@
+- const currentFile = typeof filename !== 'undefined' ? filename : ''
+- const isHome = currentFile.includes('index.pug')
+
+doctype html
+html(lang="es")
+  head
+  title Violet Forest // Creative Technologist
+  link(href="./../css/scrolling-demo.css" rel="stylesheet" type="text/css")
+  link(href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap" rel="stylesheet")
+  body(class="demo-1 loading" id=isHome ? "home" : "page")
+    canvas(id="webgl")
+    main
+      include ./partials/header.pug
+      block content
+    include ./partials/footer.pug
