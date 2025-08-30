@@ -1,13 +1,13 @@
-- const currentFile = typeof filename !== 'undefined' ? filename : ''
-- const isHome = currentFile.includes('index.pug')
+- const file = (typeof filename === 'string' ? filename : '').replace(/\\/g, '/')
+- const isHome = /\/src\/index\.pug$/.test(file)   // adjust "src" if your folder is named differently
 
 doctype html
-html(lang="es")
+html(lang="en")
   head
   title Violet Forest // Creative Technologist
   link(href="./../css/scrolling-demo.css" rel="stylesheet" type="text/css")
   link(href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&display=swap" rel="stylesheet")
-  body(class="demo-1 loading" id=isHome ? "home" : "page")
+  body(class="demo-1 loading", id=isHome ? "home" : "page")
     canvas(id="webgl")
     main
       include ./partials/header.pug
