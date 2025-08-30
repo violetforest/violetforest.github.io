@@ -1,0 +1,137 @@
+@font-face {
+  font-family: chi;
+  src: url('../fonts/chi.ttf');
+}
+p {
+  margin: 2em 0;
+}
+body {
+  line-height: 2.3em;
+}
+.list li:first-of-type {
+  padding: 1em 0 0;
+}
+.col2 {
+  width: 49%;
+  display: inline-block;
+}
+.font {
+  font-family: "chi";
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 0.005em;
+}
+.gradient-bg {
+  background: linear-gradient(30deg, #FB79DB, #e55aa1, #FB79DB);
+  background-size: 300% 300%;
+
+  -webkit-animation: AnimationName 6s ease infinite;
+  -moz-animation: AnimationName 6s ease infinite;
+  animation: AnimationName 30s ease infinite;
+}
+@-webkit-keyframes AnimationName {
+    0%{background-position:0% 48%}
+    100%{background-position:100% 53%}
+}
+@-moz-keyframes AnimationName {
+    0%{background-position:0% 48%}
+    100%{background-position:100% 53%}
+}
+@keyframes AnimationName {
+    0%{background-position:48% 0%}
+    100%{background-position:53% 100%}
+}
+.outline {
+  border: 4px #ffffff solid;
+  margin: 2%;
+}
+.responsive-width {
+  display: block;
+  width: auto;
+  padding: 8% 0 10%;
+}
+.col {
+  width: 100%;
+  margin: auto;
+}
+@media (max-width: 800px) {
+  .col {
+    width: 80%;
+    margin: auto;
+  }
+  .list li {
+    padding: 1em 0;
+  }
+}
+.left {
+  display: block;
+  text-align: left;
+}
+.center {
+  display: block;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+}
+.intro {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+.col li {
+  list-style: none;
+}
+.square {
+  position: relative;
+  display: inline-block;
+  width: 33%;
+  text-align: center;
+}
+.square-img {
+  margin: auto;
+  display: block;
+}
+.logo {
+  vertical-align: middle;
+}
+.main-wrppr {
+  width: 600px;
+  margin: auto;
+}
+@media (max-width: 800px) {
+  .main-wrppr {
+    width: 100%;
+    margin: auto;
+  }
+}
+.ruler {
+  width: 90%;
+  margin: 3em;
+  border: 0;
+  height: 1px;
+  background: #fff;
+}
+.list {
+  padding: 1em 0;
+}
+a {
+  color: rgb(0, 6, 195);
+}
+.cv {
+  font-size: 1em;
+}
+h4 {
+  padding: 2em 0;
+  text-transform: uppercase;
+}
+body {
+  position: relative;
+}
+h2 {
+  font-size: 2em;
+  padding: 0;
+  margin: 0;
+}
+h3 {
+    padding: 6em 0 2em;
+}

@@ -1,0 +1,238 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.3.32",
+        "version" : "2.0"
+    },
+    "extensionsUsed" : [
+        "KHR_materials_specular",
+        "KHR_materials_ior"
+    ],
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                5
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Button_Like"
+        },
+        {
+            "name" : "Button_Like_B",
+            "rotation" : [
+                -0.22382007539272308,
+                0.06190311163663864,
+                0.001949618337675929,
+                0.9726607203483582
+            ],
+            "scale" : [
+                0.1446559578180313,
+                0.1446560174226761,
+                0.1446560025215149
+            ],
+            "translation" : [
+                1.3021109104156494,
+                15.635143280029297,
+                -8.468171119689941
+            ]
+        },
+        {
+            "name" : "Button_Like_C",
+            "rotation" : [
+                0.0999450832605362,
+                2.5153498427243903e-05,
+                0.23875463008880615,
+                0.965923011302948
+            ],
+            "scale" : [
+                0.1446559727191925,
+                0.1446560025215149,
+                0.2833324670791626
+            ],
+            "translation" : [
+                -7.563853740692139,
+                14.93655776977539,
+                2.5706210136413574
+            ]
+        },
+        {
+            "children" : [
+                1,
+                2
+            ],
+            "name" : "Button_Like_A",
+            "rotation" : [
+                -0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "children" : [
+                3
+            ],
+            "name" : "Button_Like_Base",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ],
+            "scale" : [
+                1.2418750524520874,
+                1.2418750524520874,
+                1.2418750524520874
+            ]
+        },
+        {
+            "children" : [
+                0,
+                4
+            ],
+            "name" : "Armature",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ],
+            "scale" : [
+                0.006593933328986168,
+                0.006593931932002306,
+                0.006593931932002306
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "extensions" : {
+                "KHR_materials_specular" : {
+                    "specularColorFactor" : [
+                        1.8970859784779757,
+                        1.8970859784779757,
+                        1.8970859784779757
+                    ]
+                },
+                "KHR_materials_ior" : {
+                    "ior" : 1.4500000476837158
+                }
+            },
+            "name" : "Button_Like",
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 0
+                },
+                "roughnessFactor" : 0.7171573042869568
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "Button_Like_BaseColor",
+            "uri" : "Button_Like_BaseColor.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 988,
+            "max" : [
+                16.879798889160156,
+                17.948495864868164,
+                16.87980079650879
+            ],
+            "min" : [
+                -16.879798889160156,
+                -16.879798889160156,
+                -16.879798889160156
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 988,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 988,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 4893,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 11856,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 11856,
+            "byteOffset" : 11856,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 7904,
+            "byteOffset" : 23712,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 9786,
+            "byteOffset" : 31616,
+            "target" : 34963
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 41404,
+            "uri" : "like.bin"
+        }
+    ]
+}

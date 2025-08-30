@@ -1,0 +1,61 @@
+extends ./../layout.pug
+block content
+  div(class="content")
+    div(class="content__details")
+      h1.content__title Technical Artist at Meta (2024-2023)
+      div.tech-tag__container
+        span.tech-tag Unity C#
+        span.tech-tag VR
+        span.tech-tag MR
+        span.tech-tag Quest 3
+
+      p.page-text
+        | As a Technical Artist for Horizon Worlds, I collaborated with engineers to facilitate building Meta's own proprietary game engine. This includes game asset ingestion for animaton, VFX, USD, materials, and scripts. Programs I have been working with include Maya, Blender, PopcornFX, and Perforce. I also made a Mixed Reality prototype for the internal hackathon.
+
+      div.grid
+        div(class="center content__details__img")
+          img(class="center content__details__img" src="./../img/2023/meta/quest3.png")
+      div.grid
+        div(class="center content__details__img")
+          img(class="center content__details__img" src="./../img/2023/meta/superrumble.png")
+
+  div(class="content")
+    div(class="content__details")
+      h1.content__title Technical Artist for Anouschka (2023)
+      div.tech-tag__container
+        span.tech-tag AR
+        span.tech-tag Unity C#
+        span.tech-tag Shader Graph
+        span.tech-tag Lighting    
+
+      p.page-text
+        | Interactive shaders with shadergraph and scene lighting in Unity. Prototyping with Niantic Lightship.
+
+      div(class="center content__details__img")
+        img(class="center content__details__img" src="./../img/2023/anou/anou2.jpeg")
+
+      div.grid
+        div(class="center content__details__img")
+          img(class="center content__details__img" src="./../img/2023/anou/anou5.gif")
+
+      div.grid
+        div(class="center content__details__img")
+          img(class="center content__details__img" src="./../img/2023/anou/anou6.gif")
+
+      div
+        iframe(
+          src="https://player.vimeo.com/video/993305305?h=b47ef1dc77&loop=1&autoplay=1&muted=1"
+          style="width:100%;height:600px"
+          frameborder="0"
+          allow="autoplay; fullscreen; looping"
+          allowfullscreen
+        )
+          script(src="https://player.vimeo.com/api/player.js")
+
+      div(class="center content__details__img")
+        img(class="center content__details__img" src="./../img/2023/anou/shadergraph1.png")
+
+      div(class="center content__details__img")
+        img(class="center content__details__img" src="./../img/2023/anou/shadergraph3.png")
+
+      include ./../partials/back.pug

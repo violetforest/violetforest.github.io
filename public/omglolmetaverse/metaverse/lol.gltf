@@ -1,0 +1,252 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.3.32",
+        "version" : "2.0"
+    },
+    "extensionsUsed" : [
+        "KHR_materials_ior"
+    ],
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                8
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "mesh" : 0,
+            "name" : "Button_Haha"
+        },
+        {
+            "name" : "Button_Love_A"
+        },
+        {
+            "name" : "Button_Love_B2",
+            "translation" : [
+                0,
+                19.930879592895508,
+                5.656239986419678
+            ]
+        },
+        {
+            "children" : [
+                2
+            ],
+            "name" : "Button_Love_B1",
+            "rotation" : [
+                -0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "name" : "Button_Love_CL",
+            "rotation" : [
+                0.569627583026886,
+                -0.21588829159736633,
+                -0.2636643350124359,
+                0.747929036617279
+            ],
+            "translation" : [
+                8.57863712310791,
+                17.818159103393555,
+                -8.657597541809082
+            ]
+        },
+        {
+            "name" : "Button_Love_CR",
+            "rotation" : [
+                0.5696279406547546,
+                0.2158878892660141,
+                0.2636636197566986,
+                0.7479290962219238
+            ],
+            "translation" : [
+                -8.578202247619629,
+                17.81816291809082,
+                -8.657600402832031
+            ]
+        },
+        {
+            "children" : [
+                4,
+                5
+            ],
+            "name" : "Button_Love_C",
+            "rotation" : [
+                -0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ]
+        },
+        {
+            "children" : [
+                1,
+                3,
+                6
+            ],
+            "name" : "Button_Love_Base",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ],
+            "scale" : [
+                1.2418749332427979,
+                1.2418749332427979,
+                1.2418749332427979
+            ]
+        },
+        {
+            "children" : [
+                0,
+                7
+            ],
+            "name" : "Armature",
+            "rotation" : [
+                0.7071068286895752,
+                0,
+                0,
+                0.7071067094802856
+            ],
+            "scale" : [
+                0.006353663746267557,
+                0.006353662349283695,
+                0.006353662349283695
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "extensions" : {
+                "KHR_materials_specular" : {
+                    "specularColorFactor" : [
+                        0,
+                        0,
+                        0
+                    ]
+                },
+                "KHR_materials_ior" : {
+                    "ior" : 1.4500000476837158
+                }
+            },
+            "name" : "Button_Haha",
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 0
+                },
+                "roughnessFactor" : 0.858578622341156
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Mesh",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "POSITION" : 0,
+                        "NORMAL" : 1,
+                        "TEXCOORD_0" : 2
+                    },
+                    "indices" : 3,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "Button_Haha_Base_Color",
+            "uri" : "Button_Haha_Base_Color.png"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5126,
+            "count" : 1088,
+            "max" : [
+                20.96259880065918,
+                21.283205032348633,
+                20.96259880065918
+            ],
+            "min" : [
+                -20.96259880065918,
+                -20.96259880065918,
+                -20.96259880065918
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 1088,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 1088,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5123,
+            "count" : 5796,
+            "type" : "SCALAR"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 13056,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 13056,
+            "byteOffset" : 13056,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 8704,
+            "byteOffset" : 26112,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 11592,
+            "byteOffset" : 34816,
+            "target" : 34963
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9729,
+            "minFilter" : 9987
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 46408,
+            "uri" : "lol.bin"
+        }
+    ]
+}

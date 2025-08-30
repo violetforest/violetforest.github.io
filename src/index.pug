@@ -1,0 +1,32 @@
+extends layout.pug
+block content
+  -
+    const sections = [
+      {
+        'title': 'VR/AR/MR',
+        'imgUrl': './../img/2023/meta/quest3.png',
+        'linkUrl': './xr/',
+      },
+      {
+        'title': 'Front-End',
+        'imgUrl': './../img/pw-site.gif',
+        'linkUrl': './frontend/',
+      }
+    ]
+    
+  div.content
+    div.content__section
+      div.content__main
+      h2.content__text ⋆⋰⋆⍣⋰⋆
+
+    each section in sections
+      div.content__section
+        a.content__link(href=section.linkUrl)
+          img.content__img(src='./../img/' + section.imgUrl)
+          h2.content__text
+            | #{section.title}
+
+    div.content__section
+      div
+        a(href="./bio/")
+          h2.content__text bio

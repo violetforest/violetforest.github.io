@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>💐</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Audiowide|Exo+2:300|VT323" rel="stylesheet">
+    <link href="./../cara/css/styles.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <div class="flower">
+      <a class="next-link" href="../lipstick/">Next</a>
+
+    <script src="./../cara/build/three.js"></script>
+    <script src="./../cara/js/loaders/OBJLoader.js"></script>
+    <script id="vertexShader" type="x-shader/x-vertex">
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+    </script>
+
+    <script id="fragmentShader" type="x-shader/x-fragment">
+      uniform sampler2D baseTexture;
+      uniform float baseSpeed;
+      uniform sampler2D noiseTexture;
+      uniform float noiseScale;
+      uniform float alpha;
+      uniform float time;
+      uniform vec2 resolution;
+
+      varying vec2 vUv;
+      void main()
+      {
+        vec2 uvTimeShift = vUv + vec2( -0.3, 1.5 ) * time * baseSpeed;
+        vec4 noiseGeneratorTimeShift = texture2D( noiseTexture, uvTimeShift );
+        vec2 uvNoiseTimeShift = vUv + noiseScale * vec2( noiseGeneratorTimeShift.r, noiseGeneratorTimeShift.b );
+        vec4 baseColor = texture2D( baseTexture, uvNoiseTimeShift );
+
+        baseColor.a = alpha;
+        gl_FragColor = baseColor;
+      }
+    </script>
+
+    <script>
+      var container;
+      var camera, cameraBg, scene, sceneBg, renderer;
+      var mouseX = 0, mouseY = 0;
+      var windowHalfX = window.innerWidth / 2;
+      var windowHalfY = window.innerHeight / 2;
+      var clock = new THREE.Clock();
+      var noiseTexture = new THREE.ImageUtils.loadTexture( 'seamless.jpg' );
+      noiseTexture.wrapS = noiseTexture.wrapT = THREE.RepeatWrapping;
+
+      init();
+      animate();
+      function init() {
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+
+        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+        camera.position.set(0, 0, 275);
+
+        this.customUniforms2 = {
+          baseSpeed:    { type: "f", value: 0.05 },
+          noiseTexture:   { type: "t", value: noiseTexture },
+          noiseScale:   { type: "f", value: 0.5337 },
+          alpha:      { type: "f", value: 1.0 },
+          time:       { type: "f", value: 1.0 }
+        };
+
+        // scene
+        scene = new THREE.Scene();
+
+        var ambient = new THREE.AmbientLight( 0xffccff);
+        scene.add( ambient );
+
+        var directionalLight = new THREE.DirectionalLight( 0xffccff );
+        directionalLight.position.set( 0, 0, 1 );
+        scene.add( directionalLight );
+        // model
+
+
+        var texture = new THREE.Texture();
+
+        var materialNormal = new THREE.MeshNormalMaterial( { overdraw: 0.5 } );
+
+        var materialShader = new THREE.ShaderMaterial( {
+          uniforms: customUniforms2,
+          vertexShader: document.getElementById( 'vertexShader' ).textContent,
+          fragmentShader: document.getElementById( 'fragmentShader' ).textContent
+        } );
+
+        var manager = new THREE.LoadingManager();
+        manager.onProgress = function ( item, loaded, total ) {
+          console.log( item, loaded, total );
+        };
+
+        var onProgress = function ( xhr ) {
+          if ( xhr.lengthComputable ) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
+            console.log( Math.round(percentComplete, 2) + '% downloaded' );
+          }
+        };
+
+        var loader = new THREE.OBJLoader(manager);
+
+        for ( var i = 0; i < 1; i ++ ) {
+          loader.load("./obj/hand.obj", function(object) {
+            object.traverse(function(child) {
+              if (child instanceof THREE.Mesh) {
+                child.material.map = texture;
+                child.material = materialNormal;
+                materialNormal.side = THREE.DoubleSide;
+            }
+           });
+            object.position.x = 8;
+            object.position.y = -3;
+            object.position.z = 0;
+
+            console.log("object.position.x" + object.position.x);
+            console.log("object.position.y" + object.position.y);
+            console.log("object.position.z" + object.position.z);
+
+            object.scale.x = 60;
+            object.scale.y = 60;
+            object.scale.z = 60;
+            obj = object;
+            scene.add(obj);
+          });
+        }
+
+        for ( var i = 0; i < 1; i ++ ) {
+          loader.load("./obj/bouquet.obj", function(object) {
+            object.traverse(function(child) {
+              if (child instanceof THREE.Mesh) {
+                child.material.map = texture;
+                child.material = materialNormal;
+                materialNormal.side = THREE.DoubleSide;
+            }
+           });
+            object.position.x = 8;
+            object.position.y = -3;
+            object.position.z = 0;
+
+            console.log("object.position.x" + object.position.x);
+            console.log("object.position.y" + object.position.y);
+            console.log("object.position.z" + object.position.z);
+
+            object.scale.x = 60;
+            object.scale.y = 60;
+            object.scale.z = 60;
+            obj = object;
+            scene.add(obj);
+          });
+        }
+        var geometry = new THREE.PlaneBufferGeometry( (window.innerWidth), (window.innerHeight));
+        var mesh = new THREE.Mesh( geometry, materialShader );
+        mesh.position.z = -100;
+        scene.add( mesh );
+        //
+        renderer = new THREE.WebGLRenderer({alpha: true});
+        renderer.autoClear = false;
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        renderer.setFaceCulling( THREE.CullFaceNone );
+        container.appendChild( renderer.domElement );
+        document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
+        //
+        window.addEventListener( 'resize', onWindowResize, false );
+      }
+      function onWindowResize() {
+        windowHalfX = window.innerWidth / 2;
+        windowHalfY = window.innerHeight / 2;
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize( window.innerWidth, window.innerHeight );
+      }
+      function onDocumentMouseMove( event ) {
+        mouseX = ( event.clientX - windowHalfX ) / 2;
+        mouseY = ( event.clientY - windowHalfY ) / 2;
+      }
+      //
+      function animate() {
+        requestAnimationFrame( animate );
+        render();
+        var delta = clock.getDelta();
+        customUniforms2.time.value += delta;
+      }
+      function render() {
+        camera.position.x += ( - mouseX - camera.position.x ) * .01;
+        camera.position.y += ( mouseY - camera.position.y ) * .01;
+
+        if (camera.position.x > 80) {
+          camera.position.x = 80;
+        } else if (camera.position.x < -80) {
+          camera.position.x = -80;
+        }
+
+        if (camera.position.y > 30) {
+          camera.position.y = 30;
+        } else if (camera.position.y < -50) {
+          camera.position.y = -50;
+        }
+
+        camera.lookAt( scene.position );
+        renderer.render( scene, camera );
+      }
+    </script>
+
+  </body>
+</html>
