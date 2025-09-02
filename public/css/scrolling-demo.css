@@ -5,6 +5,10 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 	box-sizing: border-box;
 }
 
+.underline {
+	text-decoration: underline;
+}
+
 body {
 	font-family: "Heebo", sans-serif;
 	min-height: 100vh - var(fontsize-scroll-text)
