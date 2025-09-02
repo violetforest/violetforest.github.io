@@ -1,0 +1,90 @@
+extends ./../layout.pug
+block content
+  div(class="content")
+    div(class="content__details")
+      h1.content__title Technical Artist at Meta (2024-2023)
+      div.tech-tag__container
+        span.tech-tag Pipelines
+        span.tech-tag Tooling       
+        span.tech-tag Maya/Blender
+        span.tech-tag PyQt/PySide
+        span.tech-tag PopcornFX
+
+      div(class="center content__details__img")
+
+        div.grid
+          div(class="center content__details__img")
+            img(class="center content__details__img" src="./../img/2023/meta/superrumble.png")
+        
+        div.grid
+          div(class="center content__details__img")
+            img(class="center content__details__img" src="./../img/2023/meta/superrumble_weapons.jpg")
+        
+        p.caption
+          | At Meta, I contributed to a <span class="bold">FPS</span> networked multiplayer demo by optimizing 3D asset pipelines, automating <span class="bold">PBR material</span> exports with Python tools, and collaborating with engineers and designers to improve workflows for importing environments, weapons, and characters into the engine.
+        
+      //- Collapsible Art Pipelines section
+      details(open)
+        summary + Art Pipelines
+        p.caption
+          | Streamlined 3D asset ingestion pipelines for a networked multiplayer shooter, optimizing workflows for importing animated weapons, environment props, and character assets from Maya and Blender into the engine. Collaborated with artists and engineers to ensure performance budgets, naming conventions, and asset dependencies were consistently met.
+
+      //- Collapsible Tooling section
+      details
+        summary + Tooling
+        p.caption
+          | Built custom pipeline automation tools in Python (PyQt/PySide) to accelerate artist workflows, enabling one-click export of PBR materials, textures, and 3D models from Maya. Integrated standardized metadata handling and validation systems to reduce export errors, improve iteration speed, and maintain technical compliance across assets.
+
+      //- Collapsible VFX Quality Control section
+      details
+        summary + VFX Quality Control
+        p.caption
+          | Managed quality control of VFX assets delivered by external vendors, ensuring compliance with technical specifications, artistic standards, and production requirements.
+
+      //- Collapsible Technical Writing section
+      details
+        summary + Technical Writing
+        p.caption
+          | Authored and maintained comprehensive technical documentation for Meta’s proprietary game engine during its early development, detailing VR/AR pipelines across audio systems, physics integration, real-time rendering, shader/material workflows, USD pipelines, and 3D animation formats (FBX, glTF, OBJ). Partnered closely with C++ engineers, technical artists, and designers to define engine specifications, establish asset guidelines, and enable faster onboarding and cross-team collaboration during the engine’s build-out.
+
+  div(class="content")
+    div(class="content__details")
+      h1.content__title Technical Artist for Anouschka (2023)
+      div.tech-tag__container
+        span.tech-tag Augmented Reality
+        span.tech-tag Unity C#
+        span.tech-tag Shader Graph
+        span.tech-tag Lighting
+  
+      p.caption
+        | Partnered with the client and internal project managers and 3D artists to establish the visual direction and delivered the required materials, shaders and lighting, ensuring visual quality and technical feasibility.
+      div
+        iframe(
+          src="https://player.vimeo.com/video/993305305?h=b47ef1dc77&loop=1&autoplay=1&muted=1"
+          style="width:100%;height:600px"
+          frameborder="0"
+          allow="autoplay; fullscreen; looping"
+          allowfullscreen
+        )
+        script(src="https://player.vimeo.com/api/player.js")
+        div(class="center content__details__img")
+          p(class="caption")
+            | Defined the lighting style and scene atmosphere, selecting a Unity volumetric lighting solution to create cinematic “god rays” and incorporating baked lighting techniques to balance visual quality and real-time performance.
+          p(class="caption") 
+            | Created a procedural triplanar ShaderGraph for seamless newspaper-style wall textures, reducing texture stretching and optimizing UV mapping across surfaces, .
+        div(class="center content__details__img")
+          img(class="center content__details__img" src="./../img/2023/anou/shadergraph1.png")
+          p.caption
+            | Triplanar ShaderGraph
+      div(class="center content__details__img")
+        div.grid
+          div.grid
+            img(class="center content__details__img" src="./../img/2023/anou/glow-shader.gif")
+          p(class="caption")
+            | <br> Implemented gameplay-driven ShaderGraphs reacting to AR triggers and user inputs, enhancing immersion in mobile AR experiences.
+
+      div(class="center content__details__img")
+        img(class="center content__details__img" src="./../img/2023/anou/shadergraph3.png")
+        p(class="caption")
+          | <br> Prototyped an Audio Interactive Particle Field ShaderGraph
+      include ./../partials/back.pug

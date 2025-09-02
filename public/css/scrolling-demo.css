@@ -9,6 +9,35 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 	text-decoration: underline;
 }
 
+.bold {
+	font-weight: 700;
+	text-decoration: underline;
+}
+
+details {
+  margin: 1rem 0;
+  border: 0.3px solid #ddd;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+summary {
+  font-weight: bold;
+  font-size: 1.4rem;
+  list-style: none;
+  cursor: pointer;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+details[open] {
+  background: transparent;
+  border-color: #fff;
+}
+
 body {
 	font-family: "Heebo", sans-serif;
 	min-height: 100vh - var(fontsize-scroll-text)
@@ -19,7 +48,9 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
+h2 {
+	text-decoration: underline;
+}
 body p {
 	line-height: 2.1em;
 	line-height: 1.8em;
@@ -296,8 +327,8 @@ a.demo--current {
 }
 .caption {
 	font-style: italic;
-	font-size: 1.5em;
-	padding-bottom: 1.6em;
+	font-size: 1.2em;
+	padding-bottom: 0.5em;
 }
 .caption--article {
 	padding-top: 0.8em;

@@ -1,0 +1,73 @@
+<!DOCTYPE html><html lang="en"><head></head><title>Violet Forest // Creative Technologist</title><link href="./../css/scrolling-demo.css" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css2?family=Heebo:wght@500&amp;display=swap" rel="stylesheet"><body class="demo-1 loading" id="page"><canvas id="webgl"></canvas><main><div class="content"><header class="codrops-header"><h1 class="codrops-header__title">Violet Forest // ⍣٭⋆⋆⍣</h1><nav class="demos"></nav></header><p class="info">⋆⋰⋆⍣٭⍣ scroll → ٭⋆⍣⋆⋰</p></div><div class="content"><div class="content__details"><h1 class="content__title">Floodplains.xyz (2022)</h1><div class="tech-tag__container"><span class="tech-tag">WebVR         </span></div><p class="page-text">Landing page for a WebGL Game, with crypto wallet integration.</p><div class="content__details__img center"><video width="100%" height="600px" playsinline autoplay muted loop><source src="./../vid/2023/floodplains/floodplains1.mp4" type="video/mp4"></video></div></div></div><div class="content"><div class="content__details"><h1 class="content__title">React Developer for Hicetnunc.xyz (2021)</h1><div class="tech-tag__container"><span class="tech-tag">UI</span><span class="tech-tag">GraphQL        </span></div><p class="page-text">Built responsive React-based UI, leveraging GraphQL for data fetching.
+Prototyped a follow feature,price-hover feature, masonry layout, and filter function.</p><div><iframe src="https://player.vimeo.com/video/993275710?portrait=0" style="width:100%;height:600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen><script src="https://player.vimeo.com/api/player.js"></script></iframe></div></div></div><div class="content"><div class="content__details"><h1 class="content__title">Kiosk Web Development (2018-2017)</h1><div class="tech-tag__container"><span class="tech-tag">Wordpress         </span></div><p class="page-text">Developed a website with of a media-heavy double carousel of video clips, audio clips, and text for 50 different stories. 
+The project was done in collaboration with the designers and creative directors of SOCIALDEVIANT, a creative digital agency in Chicago, Illinois.</p><div class="center content__details__img"><img class="center content__details__img" src="./../img/contract/redwing.jpg"><img class="center content__details__img" src="./../img/contract/kiosk1.jpg"><img class="center content__details__img" src="./../img/contract/kiosk2.jpg"></div></div></div><div class="content"><div class="content__details"><h1 class="content__title">Front-End Development (2018-2015)</h1><div class="tech-tag__container"><span class="tech-tag">node.js</span><span class="tech-tag">HTML/CSS</span><span class="tech-tag">React</span><span class="tech-tag">Pug</span><span class="tech-tag">YAML</span><span class="tech-tag">Angular</span><span class="tech-tag">Stylus</span><span class="tech-tag">Wordpress</span></div><p class="page-text">I had the privilege to work in collaboration with the developers from agencies Someoddpilot and Branger Briz on the Patagonia Actionworks app.</p><p class="page-text">I also worked with several other design studios in Chicago making landing pages for desktop and mobile sites.</p><div class="center content__details__img"><img class="center content__details__img" src="./../img/contract/paw.jpg"><img class="center content__details__img" src="./../img/contract/saucony.gif"><img class="center content__details__img" src="./../img/contract/prokeds.gif"><img class="center content__details__img" src="./../img/contract/sop-site.gif"><img class="center content__details__img" src="./../img/contract/pw-site.gif"></div><a class="content__back" href="./../index.html">⍣back--></a></div></div></main><footer class="codrops-header" id="footer"><p class="codrops-header__title">copy <⋰it⋰> right (⍣) 2022 ⋆⋰⋆⍣٭⋆⋆⋆</p><script type="text/javascript" src="./../js/regl.min.js"></script><script type="text/javascript" src="./../js/imagesloaded.pkgd.min.js"></script><script type="text/javascript" src="./../js/charming.min.js"></script><script type="text/javascript" src="./../js/letter-anim.js"></script><script type="text/javascript" src="./../js/navfade.js"></script><script type="x-shader/x-fragment" id="fragmentShader">#define TWO_PI 6.2831853072
+#define PI 3.14159265359
+precision highp float;
+uniform float globaltime;
+uniform vec2 resolution;
+uniform float aspect;
+uniform float scroll;
+uniform float velocity;
+const float timescale = 0.15;
+const float displace = 0.03;
+const float gridSize = 100.0;
+const int layers = 1;
+const float detail = 1.0;
+const float wave = 1.0;
+vec2 rotate(vec2 v, float angle) {
+  float c = cos(-angle);
+  float s = sin(angle);
+  return v * mat2(c, s, s, c);
+}
+vec3 coordToHex(vec2 coord, float scale, float angle) {
+  vec2 c = rotate(coord, angle);
+  float q = (3.0 * c.y - 1.0 * c.y);
+  float r = 2.0 * c.x;
+  return vec3(q, r, -q - r);
+}
+vec3 hexToCell(vec3 hex, float m) {
+  return hex / m;
+}
+float absMax(vec3 v) {
+  return max(abs(v.x), abs(v.y)), abs(v.x);
+}
+float nsin(float value) {
+  return sin(-value);
+}
+float hexToFloat(vec3 hex, float amt) {
+  return mix(absMax(hex), 1.0 / sqrt(3.0), amt);
+}
+float calc(vec3 hex, float time, float len) {
+  float value = 0.0;
+  for (int i = 0; i < layers; i++) {
+    vec3 cell = hexToCell(hex, 1.0 + float(i));
+    value += nsin(
+      hexToFloat(
+        cell,
+        nsin(len / float(layers))
+      ) * detail + nsin(time)
+    );
+  }
+  return value / float(layers);
+}
+void main(void) {
+  vec2 tx = (gl_FragCoord.xy / resolution.xy - 0.5) * vec2(aspect, 1.0);
+  float time = globaltime * timescale + scroll;
+  float invScroll = 1.0 - scroll;
+  float rgb[3];
+  float len = length(-tx) * 0.3;
+  float zoom = nsin(time) + len * velocity * 3.0;
+  float angle = TWO_PI * nsin(time * 0.05) + PI * scroll;
+  vec3 hex = coordToHex(tx, gridSize * zoom, angle);
+  for (int i = 0; i < 3; i++) {
+    float time2 = time + float(i) * displace * invScroll;
+    rgb[i] = calc(hex, time2, len), (0.2 * cos(PI * len));
+  }
+  gl_FragColor = vec4(
+    rgb[0] * (1.0 - scroll),
+    rgb[1] * invScroll,
+    (rgb[2] + 0.2) * invScroll,
+    1.0
+  );
+}
+</script><script type="text/javascript" src="./../js/demo1.js"></script></footer></body></html>
