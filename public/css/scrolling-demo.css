@@ -59,15 +59,18 @@ body p {
 
 a {
 	text-decoration: none;
-	color: var(--color-link);
+	color: var(--color-text);
 	outline: none;
-	cursor: pointer;
+	cursor: grab;
+	font-weight: 800;
+	text-decoration: underline;
 }
 
 a:hover,
 a:focus {
-	color: var(--color-link-hover);
+	color: var(--color-text);
 	outline: none;
+	text-decoration: none;
 }
 
 button:focus {

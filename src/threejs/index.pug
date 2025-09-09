@@ -1,0 +1,39 @@
+extends ./../layout.pug
+block content 
+  div(class="content")
+    div(class="content__details")
+      h1.content__title Three.js
+      div.tech-tag__container
+        span.tech-tag Three.js         
+  
+  div(class="content")
+    div(class="content__details")
+      div(class="center content__details__img")    
+        iframe(width="100%" height="500"
+          src="https://www.youtube.com/embed/ti72lPRoD3k?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        )
+        p.caption
+          a(href="https://violetforest.com/tones" target="_blank") Click to go to site     
+      div(class="center content__details__img")
+        iframe(width="100%" height="500"
+          src="https://www.youtube.com/embed/PWzSbhVxcnM?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        )
+        p.caption
+          a(href="https://violetforest.com/tones" target="_blank") Click to go to site     
+                
+        //- p.page-text
+        //- | I also worked with several other design studios in Chicago making landing pages for desktop and mobile sites.
+
+        //- div(class="center content__details__img")
+        //-   img(class="center content__details__img" src="./../img/contract/paw.jpg")
+        //-   img(class="center content__details__img" src="./../img/contract/saucony.gif")
+        //-   img(class="center content__details__img" src="./../img/contract/prokeds.gif")
+        //-   img(class="center content__details__img" src="./../img/contract/sop-site.gif")
+        //-   img(class="center content__details__img" src="./../img/contract/pw-site.gif")
+      include ./../partials/back.pug

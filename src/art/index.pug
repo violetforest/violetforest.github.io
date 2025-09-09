@@ -1,0 +1,25 @@
+extends ./../layout.pug
+block content
+  div(class="content")
+    div(class="content__details")
+      h1.content__title 2023
+      div.tech-tag__container
+        span.tech-tag Video         
+  
+  div(class="content")
+    div(class="content__details")
+      div(class="center content__details__img") 
+        iframe(width="100%" height="500"
+          src="https://www.youtube.com/embed/ECp6HLuk_Kw?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1&"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        )
+          
+        iframe(width="100%" height="500"
+          src="https://www.youtube.com/embed/6PFJeF_h4TM?autoplay=1&mute=1&controls=0&modestbranding=1&rel=0&loop=1"
+          frameborder="0"
+          allow="autoplay; encrypted-media"
+          allowfullscreen
+        )
+      include ./../partials/back.pug
