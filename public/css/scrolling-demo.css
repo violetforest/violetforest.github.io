@@ -4,7 +4,6 @@ article,aside,details,figcaption,figure,footer,header,hgroup,main,nav,section,su
 *::before {
 	box-sizing: border-box;
 }
-
 .underline {
 	text-decoration: underline;
 }
