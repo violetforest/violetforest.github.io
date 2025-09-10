@@ -89,6 +89,7 @@ block content
         p.tech-tag Hand Tracking
 
       div.grid
+        div(class="content__details__img center")
         video(width='auto', height='500px', playsinline, autoplay, muted, loop)
           source(src='./../vid/2021/sparklehands.mp4', type='video/mp4')
 
@@ -100,15 +101,22 @@ block content
         | Parenting particle systems to the joints of the fingers. Made with WebXR + Unity.
 
     div(class="content__details")
-      h1.content__title Spark AR Face Filter (2023)
+      h1.content__title Spark AR (2023)
       div.tech-tag__container
       p.tech-tag Augmented Reality
       p.tech-tag Spark AR
+      p.tech-tag 3D
 
       div.content__details
-        .content
-          video(class="content__details__img" width='100%', height='auto', playsinline, autoplay, muted, loop)
-            source(src='./../img/2024/wings-filter.mp4', type='video/mp4')
+        div.grid
+          .content
+            video(width='100%', height='600px', playsinline, autoplay, muted, loop)
+              source(src='./../img/2023/ar-lenticular.mp4', type='video/mp4')
+
+        div.grid
+          .content
+            video(class="content__details__img" width='100%', height='600px', playsinline, autoplay, muted, loop)
+              source(src='./../img/2024/wings-filter.mp4', type='video/mp4')
 
     div(class="content__details")
       h1.content__title XR for Driving Simulators (2020-2018)
