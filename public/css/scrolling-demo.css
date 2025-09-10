@@ -214,6 +214,10 @@ video {
 	padding: 2vw 0;
 }
 
+#page .content__details__img--no-padding {
+	padding: 0;
+}
+
 .content__p {
 	position: relative;
 	display: block;
