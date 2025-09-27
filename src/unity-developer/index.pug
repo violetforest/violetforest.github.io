@@ -1,5 +1,20 @@
 extends ./../layout.pug
 block content
+  div(class="content")
+    div(class="content__details")
+      h1.content__title Floodplains.xyz VR (2022-2023)
+      div.tech-tag__container
+        span.tech-tag Unity C#
+        span.tech-tag VR
+        span.tech-tag WebVR         
+
+      p.page-text
+        | A Unity game for WebVR and Quest 2/3. I built the game with Unity and integrated it into the website. Game mechanics included picking up objects with raycast, and incorporated a timer that ran out after the house was flooded. I also integrated the assets created by the artist and producer Michelle Brown, and was given creative control over the water shader.
+    
+      div
+        iframe(src="https://player.vimeo.com/video/993270415?portrait=0" style="width:100%;height:600px" frameborder="0" allow="autoplay; fullscreen" allowfullscreen)
+          script(src="https://player.vimeo.com/api/player.js")
+
   .content
     div(class="content__details")
       h1.content__title Kiosk Development (2018-2017)
